@@ -36,8 +36,8 @@ And some very long sentence and some very long sentence and some very long sente
 
 asdfsd [link test ![image search api](https://user-images.githubusercontent.com/110724391/184472398-c590b47c-e1f2-41f8-87e6-2a1f68e8850d.png{width=200})](https://www.youtube.com/watch?v=3HIr0imLgxM)
 
-| Syntax      | Description | **Test Text**     |
-| :---        |    :----:   |          ---: |
+| **Syntax**      | Description | **Test Text**     |
+| :---        |    :----------:   |          ---: |
 | Header      | Title       | Here's this   |
 | Paragraph   | Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text | Text Text Text Text Text Text Text  ![image search api](https://user-images.githubusercontent.com/110724391/184472398-c590b47c-e1f2-41f8-87e6-2a1f68e8850d.png{width=20}) |
 """
@@ -46,6 +46,7 @@ asdfsd [link test ![image search api](https://user-images.githubusercontent.com/
 
     val renderContextBase = defaultRenderContext.derive {
         this[PdfRenderContextKeys.FONT_FAMILY] = Font.TIMES_ROMAN
+//        this[PdfRenderContextKeys.WEIGHTED_WIDTHS] = true
     }
     val registry = ElementProviderRegistry(renderContextBase).apply {
         registerRenderContextFunction(ElementProviderRenderContextKey(ATX_3.name), true) {
@@ -67,7 +68,7 @@ asdfsd [link test ![image search api](https://user-images.githubusercontent.com/
         registerRenderContextFunction(TABLE_RENDER_CONTEXT_KEY, true) {
             derive {
                 this[PdfRenderContextKeys.BORDER_COLOR] = Color.blue
-                this[PdfRenderContextKeys.BORDER_WIDTH] = 0f
+//                this[PdfRenderContextKeys.BORDER_WIDTH] = 0f
 //                this[PdfRenderContextKeys.UNDERLINE_THICKNESS] = this@registerRenderContextFunction.fontSize * 0.08f
             }
         }

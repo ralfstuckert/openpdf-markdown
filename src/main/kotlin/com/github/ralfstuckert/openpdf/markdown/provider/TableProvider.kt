@@ -22,8 +22,10 @@ class TableProvider : AbstractElementProvider() {
     override fun setupDefaultRenderContexts(registry: ElementProviderRenderContextRegistry) {
         registry.registerRenderContextFunction(TABLE_RENDER_CONTEXT_KEY) {
             derive {
-                this[PdfRenderContextKeys.BORDER_WIDTH] = this@registerRenderContextFunction[PdfRenderContextKeys.BORDER_WIDTH] ?: 1f
-                this[PdfRenderContextKeys.BORDER_COLOR] = this@registerRenderContextFunction.fontColor
+                this[PdfRenderContextKeys.BORDER_WIDTH] = registry.defaultRenderContext[PdfRenderContextKeys.BORDER_WIDTH] ?: 1f
+                this[PdfRenderContextKeys.BORDER_COLOR] = registry.defaultRenderContext.fontColor
+                this[PdfRenderContextKeys.WIDTH_PERCENTAGE] = registry.defaultRenderContext[PdfRenderContextKeys.WIDTH_PERCENTAGE] ?: 100f
+                this[PdfRenderContextKeys.WEIGHTED_WIDTHS] = registry.defaultRenderContext[PdfRenderContextKeys.WEIGHTED_WIDTHS] ?: false
             }
         }
     }
@@ -36,17 +38,18 @@ class TableProvider : AbstractElementProvider() {
         val tableRenderContext = providerContext.deriveRenderContext(TABLE_RENDER_CONTEXT_KEY)
 
         val headers = processHeaderNode(visitor, tableRenderContext, getHeader(node))
-        val columnCount = headers.size
-        val table = PdfPTable(columnCount).apply {
-            widthPercentage = 100f
-            defaultCell.paddingLeft = 0f
-        }
 
-        val rowDescriptor = processRowDescriptor(providerContext.markdownText, getRowDescriptor(node))
+        val weightedWidths = tableRenderContext[PdfRenderContextKeys.WEIGHTED_WIDTHS] ?: false
+        val rowDescriptor = processRowDescriptor(providerContext.markdownText, getRowDescriptor(node), weightedWidths)
         val borderDescriptor = tableRenderContext.getBorderDescriptor()
 
+        val relativeWidths = rowDescriptor.columnDescriptors.map { it.weight }.toFloatArray()
+        val table = PdfPTable(relativeWidths).apply {
+            widthPercentage = tableRenderContext[PdfRenderContextKeys.WIDTH_PERCENTAGE] ?: 100f
+        }
+
         headers.forEachIndexed { index, paragraph ->
-            val cell = createCell(paragraph, index, columnCount, rowDescriptor[index], borderDescriptor)
+            val cell = createCell(paragraph, index, rowDescriptor, borderDescriptor)
             table.addCell(cell)
         }
 
@@ -56,7 +59,7 @@ class TableProvider : AbstractElementProvider() {
 
         rows.forEach { row ->
             row.forEachIndexed { index, paragraph ->
-                val cell = createCell(paragraph, index, columnCount, rowDescriptor[index], borderDescriptor)
+                val cell = createCell(paragraph, index, rowDescriptor, borderDescriptor)
                 table.addCell(cell)
             }
         }
@@ -64,9 +67,9 @@ class TableProvider : AbstractElementProvider() {
         providerContext.parentPdfElement.add(table)
     }
 
-    fun createCell(paragraph: Paragraph, index:Int, columnCount:Int, columnDescriptor: TableColumnDescriptor, borderDescriptor:BorderDescriptor) =
+    fun createCell(paragraph: Paragraph, index:Int, rowDescriptor: TableRowDescriptor, borderDescriptor:BorderDescriptor) =
         PdfPCell(paragraph).apply {
-            horizontalAlignment = columnDescriptor.alignment.ordinal
+            horizontalAlignment = rowDescriptor[index].alignment.ordinal
             borderColor = borderDescriptor.color
             borderWidth = borderDescriptor.width
             if (borderDescriptor.width == 0f) {
@@ -74,7 +77,7 @@ class TableProvider : AbstractElementProvider() {
                 if (index == 0) {
                     paddingLeft = 0f
                 }
-                if (index == columnCount-1) {
+                if (index == rowDescriptor.size-1) {
                     paddingRight = 0f
                 }
             }
@@ -82,19 +85,23 @@ class TableProvider : AbstractElementProvider() {
 
     fun processRowDescriptor(
         markdownText:String,
-        node: ASTNode
+        node: ASTNode,
+        weightedWidths:Boolean
     ): TableRowDescriptor {
         assert(node.type == GFMTokenTypes.TABLE_SEPARATOR) { "expected TABLE_SEPARATOR but is '${node.type}'" }
+        val text = node.getTextInNode(markdownText).toString()
+        val sumDashCount = text.dashCount.toFloat()
+
         return TableRowDescriptor(
-            node.getTextInNode(markdownText).toString()
-                .split("|")
+            text.split("|")
                 .filterNot { it.isEmpty() }
                 .map { it.trim() }
                 .map {
+                    val weight = if(weightedWidths) it.dashCount/sumDashCount else 1f
                     when {
-                        it.startsWith(":") && it.endsWith(":") -> TableColumnDescriptor(TableColumnAlignment.center)
-                        it.endsWith(":") -> TableColumnDescriptor(TableColumnAlignment.right)
-                        else -> TableColumnDescriptor(TableColumnAlignment.left)
+                        it.startsWith(":") && it.endsWith(":") -> TableColumnDescriptor(TableColumnAlignment.center, weight)
+                        it.endsWith(":") -> TableColumnDescriptor(TableColumnAlignment.right, weight)
+                        else -> TableColumnDescriptor(TableColumnAlignment.left, weight)
                     }
                 }
         )
@@ -146,12 +153,15 @@ enum class TableColumnAlignment {
     left, center, right
 }
 
-data class TableColumnDescriptor(val alignment: TableColumnAlignment)
+data class TableColumnDescriptor(val alignment: TableColumnAlignment, val weight:Float)
 
-data class TableRowDescriptor(private val columnDescriptors: List<TableColumnDescriptor>) {
+data class TableRowDescriptor(val columnDescriptors: List<TableColumnDescriptor>) {
 
     operator fun get(index: Int): TableColumnDescriptor = // be gentle
-        if (index < columnDescriptors.size) columnDescriptors[index] else TableColumnDescriptor(TableColumnAlignment.left)
+        if (index < columnDescriptors.size) columnDescriptors[index] else TableColumnDescriptor(TableColumnAlignment.left, 1f)
+
+    val size:Int
+        get() = columnDescriptors.size
 }
 
 data class BorderDescriptor(val width:Float, val color:Color)
@@ -160,3 +170,6 @@ fun PdfRenderContext.getBorderDescriptor() = BorderDescriptor(
 this[PdfRenderContextKeys.BORDER_WIDTH] ?: 1f,
 this[PdfRenderContextKeys.BORDER_COLOR] ?: PdfRenderContextDefaults.fontColor
 )
+
+val String.dashCount
+    get() = count { it == '-' }
