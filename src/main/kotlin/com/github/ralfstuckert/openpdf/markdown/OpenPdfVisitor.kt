@@ -18,15 +18,17 @@ class OpenPdfVisitor(val markdownText:String, val registry: ElementProviderRegis
         }
     }
 
-    fun visitChildren(parentPdfElement: TextElementArray, pdfRenderContext: PdfRenderContext, node: ASTNode, skipLeadingWhitespace:Boolean=false) {
-        for (child in getChildren(node,skipLeadingWhitespace)) {
+    fun visitChildren(parentPdfElement: TextElementArray, pdfRenderContext: PdfRenderContext, node: ASTNode, trim:Boolean=false) {
+        for (child in getChildren(node,trim)) {
             visitNode(parentPdfElement, pdfRenderContext, child)
         }
     }
 
-    fun getChildren(node: ASTNode, skipLeadingWhitespace:Boolean):List<ASTNode> =
-        if (skipLeadingWhitespace) {
-            node.children.dropWhile { it.type == WHITE_SPACE }
+    fun getChildren(node: ASTNode, trim:Boolean):List<ASTNode> =
+        if (trim) {
+            node.children
+                .dropWhile { it.type == WHITE_SPACE }
+                .dropLastWhile { it.type == WHITE_SPACE }
         } else node.children
 
 

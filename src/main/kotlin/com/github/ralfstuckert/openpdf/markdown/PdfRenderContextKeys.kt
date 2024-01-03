@@ -9,6 +9,9 @@ object PdfRenderContextKeys {
     val FONT_COLOR = PdfRenderContextKey<Color>("FONT_COLOR")
 
     val UNDERLINE_THICKNESS = PdfRenderContextKey<Float>("UNDERLINE_THICKNESS")
+
+    val BORDER_WIDTH = PdfRenderContextKey<Float>("BORDER_WIDTH")
+    val BORDER_COLOR = PdfRenderContextKey<Color>("BORDER_COLOR")
 }
 
 

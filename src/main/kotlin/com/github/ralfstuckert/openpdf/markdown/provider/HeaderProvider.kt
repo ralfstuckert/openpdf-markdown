@@ -29,7 +29,7 @@ class HeaderProvider : AbstractElementProvider() {
     override fun processNode(visitor: OpenPdfVisitor, providerContext: ElementProviderContext, node: ASTNode) {
         checkNodeType(node)
         val headerRenderContext = providerContext.deriveRenderContext(ElementProviderRenderContextKey(node.type.name))
-        visitor.visitChildren(providerContext.parentPdfElement, headerRenderContext, getContentNode(node), skipLeadingWhitespace = true)
+        visitor.visitChildren(providerContext.parentPdfElement, headerRenderContext, getContentNode(node), trim = true)
     }
 
 
