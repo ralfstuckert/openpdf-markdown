@@ -46,12 +46,13 @@ asdfsd [link test ![image search api](https://user-images.githubusercontent.com/
         registerRenderContextFunction(ElementProviderRenderContextKey(ATX_3.name)) {
             derive {
                 this[PdfRenderContextKeys.FONT_SIZE] = 40f
+                this[PdfRenderContextKeys.FONT_STYLE] = Font.BOLDITALIC
             }
         }
-        registerRenderContextFunction(ElementProviderRenderContextKey(INLINE_LINK.name)) {
+        registerRenderContextFunction(ElementProviderRenderContextKey(INLINE_LINK.name), true) {
             derive {
                 this[PdfRenderContextKeys.FONT_COLOR] = Color.blue
-                this[PdfRenderContextKeys.UNDERLINE_THICKNESS] = this@registerRenderContextFunction.fontSize * 0.08f
+//                this[PdfRenderContextKeys.UNDERLINE_THICKNESS] = this@registerRenderContextFunction.fontSize * 0.08f
             }
         }
     }

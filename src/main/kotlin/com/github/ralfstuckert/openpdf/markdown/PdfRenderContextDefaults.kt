@@ -8,19 +8,13 @@ object PdfRenderContextDefaults {
     val fontSize = 12f
     val fontStyle = Font.NORMAL
     val fontColor = Color.black
-
-    val linkUnderlineThicknessFactor = 0.07f
-    val linkColor = Color.black
 }
 
 
 val defaultRenderContext = pdfRenderContext {
-    this[DefaultPdfRenderContextKeys.DEFAULT_FONT_FAMILY] = PdfRenderContextDefaults.fontFamily
-    this[DefaultPdfRenderContextKeys.DEFAULT_FONT_SIZE] = PdfRenderContextDefaults.fontSize
-    this[DefaultPdfRenderContextKeys.DEFAULT_FONT_STYLE] = PdfRenderContextDefaults.fontStyle
+    this[PdfRenderContextKeys.FONT_FAMILY] = PdfRenderContextDefaults.fontFamily
+    this[PdfRenderContextKeys.FONT_SIZE] = PdfRenderContextDefaults.fontSize
+    this[PdfRenderContextKeys.FONT_STYLE] = PdfRenderContextDefaults.fontStyle
 
-    this[DefaultPdfRenderContextKeys.DEFAULT_FONT_COLOR] = PdfRenderContextDefaults.fontColor
-
-    this[DefaultPdfRenderContextKeys.DEFAULT_LINK_UNDERLINE_THICKNESS_FACTOR] = PdfRenderContextDefaults.linkUnderlineThicknessFactor
-    this[DefaultPdfRenderContextKeys.DEFAULT_LINK_COLOR] = PdfRenderContextDefaults.linkColor
+    this[PdfRenderContextKeys.FONT_COLOR] = PdfRenderContextDefaults.fontColor
 }

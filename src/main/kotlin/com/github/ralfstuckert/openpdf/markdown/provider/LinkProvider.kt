@@ -17,16 +17,10 @@ class LinkProvider : AbstractElementProvider() {
     }
 
     override fun setupDefaultRenderContexts(registry: ElementProviderRenderContextRegistry) {
-        val underlineThicknessFactor =
-            registry.defaultRenderContext[DefaultPdfRenderContextKeys.DEFAULT_LINK_UNDERLINE_THICKNESS_FACTOR]
-                ?: PdfRenderContextDefaults.linkUnderlineThicknessFactor
-        val linkColor =
-            registry.defaultRenderContext[DefaultPdfRenderContextKeys.DEFAULT_LINK_COLOR]
-                ?: PdfRenderContextDefaults.linkColor
         registry.registerRenderContextFunction(INLINE_LINK_RENDER_CONTEXT_KEY) {
             derive {
-                this[UNDERLINE_THICKNESS] = this@registerRenderContextFunction.fontSize * underlineThicknessFactor
-                this[FONT_COLOR] = linkColor
+                this[UNDERLINE_THICKNESS] = this@registerRenderContextFunction.fontSize *  0.07f
+                this[FONT_COLOR] = PdfRenderContextDefaults.fontColor
             }
         }
     }

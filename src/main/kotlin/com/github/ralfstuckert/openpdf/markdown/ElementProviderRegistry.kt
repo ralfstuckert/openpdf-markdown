@@ -13,7 +13,7 @@ interface ElementProviderRenderContextRegistry {
 
     fun getRenderContextFunction(key: ElementProviderRenderContextKey): PdfRenderContextFunction?
 
-    fun registerRenderContextFunction(key: ElementProviderRenderContextKey, contextFunction: PdfRenderContextFunction)
+    fun registerRenderContextFunction(key: ElementProviderRenderContextKey, extendExisting:Boolean = false, contextFunction: PdfRenderContextFunction)
 
 }
 
@@ -50,8 +50,16 @@ class ElementProviderRegistry(override val defaultRenderContext:PdfRenderContext
     override fun getRenderContextFunction(key: ElementProviderRenderContextKey): PdfRenderContextFunction? =
         renderContextFunctionMap[key]
 
-    override fun registerRenderContextFunction(key: ElementProviderRenderContextKey, context: PdfRenderContextFunction) {
-        renderContextFunctionMap[key] = context
+    override fun registerRenderContextFunction(key: ElementProviderRenderContextKey, extendExisting:Boolean, contextFunction: PdfRenderContextFunction) {
+        val existingFunction = getRenderContextFunction(key)
+        val function = if (extendExisting && existingFunction != null) {
+            existingFunction then contextFunction
+        } else contextFunction
+        renderContextFunctionMap[key] = function
+    }
+
+    infix fun PdfRenderContextFunction.then(other: PdfRenderContextFunction):PdfRenderContextFunction = {
+        other(this@then(this))
     }
 
 }
