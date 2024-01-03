@@ -1,8 +1,10 @@
 package com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown
 
+import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.DefaultPdfRenderContextKeys.DEFAULT_FONT_COLOR
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.DefaultPdfRenderContextKeys.DEFAULT_FONT_FAMILY
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.DefaultPdfRenderContextKeys.DEFAULT_FONT_SIZE
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.DefaultPdfRenderContextKeys.DEFAULT_FONT_STYLE
+import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.FONT_COLOR
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.FONT_FAMILY
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.FONT_SIZE
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.FONT_STYLE
@@ -41,5 +43,7 @@ val PdfRenderContext.fontFamily
     get() = this[FONT_FAMILY] ?: this[DEFAULT_FONT_FAMILY] ?: PdfRenderContextDefaults.fontFamily
 val PdfRenderContext.fontStyle
     get() = this[FONT_STYLE] ?: this[DEFAULT_FONT_STYLE] ?: PdfRenderContextDefaults.fontStyle
+val PdfRenderContext.fontColor
+    get() = this[FONT_COLOR] ?: this[DEFAULT_FONT_COLOR] ?: PdfRenderContextDefaults.fontColor
 val PdfRenderContext.font: Font
-    get() = Font(fontFamily, fontSize, fontStyle)
+    get() = Font(fontFamily, fontSize, fontStyle, fontColor)

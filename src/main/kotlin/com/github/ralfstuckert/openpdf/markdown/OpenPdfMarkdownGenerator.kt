@@ -3,9 +3,11 @@ package com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown
 import com.lowagie.text.*
 import com.lowagie.text.pdf.PdfWriter
 import org.intellij.markdown.MarkdownElementTypes.ATX_3
+import org.intellij.markdown.MarkdownElementTypes.INLINE_LINK
 import org.intellij.markdown.flavours.MarkdownFlavourDescriptor
 import org.intellij.markdown.flavours.gfm.GFMFlavourDescriptor
 import org.intellij.markdown.parser.MarkdownParser
+import java.awt.Color
 import java.io.FileOutputStream
 
 
@@ -44,6 +46,12 @@ asdfsd [link test ![image search api](https://user-images.githubusercontent.com/
         registerRenderContextFunction(ElementProviderRenderContextKey(ATX_3.name)) {
             derive {
                 this[PdfRenderContextKeys.FONT_SIZE] = 40f
+            }
+        }
+        registerRenderContextFunction(ElementProviderRenderContextKey(INLINE_LINK.name)) {
+            derive {
+                this[PdfRenderContextKeys.FONT_COLOR] = Color.blue
+                this[PdfRenderContextKeys.UNDERLINE_THICKNESS] = this@registerRenderContextFunction.fontSize * 0.08f
             }
         }
     }

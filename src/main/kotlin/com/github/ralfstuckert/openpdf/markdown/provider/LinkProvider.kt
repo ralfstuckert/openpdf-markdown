@@ -1,25 +1,32 @@
 package com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider
 
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.*
+import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.FONT_COLOR
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.UNDERLINE_THICKNESS
-import com.lowagie.text.*
-import org.intellij.markdown.MarkdownElementTypes
+import com.lowagie.text.Anchor
 import org.intellij.markdown.MarkdownElementTypes.INLINE_LINK
 import org.intellij.markdown.MarkdownElementTypes.LINK_DESTINATION
 import org.intellij.markdown.MarkdownElementTypes.LINK_TEXT
 import org.intellij.markdown.ast.ASTNode
 import org.intellij.markdown.ast.getTextInNode
 
-class LinkProvider: AbstractElementProvider() {
+class LinkProvider : AbstractElementProvider() {
 
     companion object {
         val INLINE_LINK_RENDER_CONTEXT_KEY = ElementProviderRenderContextKey(INLINE_LINK.name)
     }
 
     override fun setupDefaultRenderContexts(registry: ElementProviderRenderContextRegistry) {
+        val underlineThicknessFactor =
+            registry.defaultRenderContext[DefaultPdfRenderContextKeys.DEFAULT_LINK_UNDERLINE_THICKNESS_FACTOR]
+                ?: PdfRenderContextDefaults.linkUnderlineThicknessFactor
+        val linkColor =
+            registry.defaultRenderContext[DefaultPdfRenderContextKeys.DEFAULT_LINK_COLOR]
+                ?: PdfRenderContextDefaults.linkColor
         registry.registerRenderContextFunction(INLINE_LINK_RENDER_CONTEXT_KEY) {
             derive {
-                this[UNDERLINE_THICKNESS] = this@registerRenderContextFunction.fontSize * 0.07f
+                this[UNDERLINE_THICKNESS] = this@registerRenderContextFunction.fontSize * underlineThicknessFactor
+                this[FONT_COLOR] = linkColor
             }
         }
     }
@@ -36,10 +43,10 @@ class LinkProvider: AbstractElementProvider() {
         providerContext.parentPdfElement.add(anchor)
     }
 
-    fun getLinkTextNode(node:ASTNode):ASTNode =
+    fun getLinkTextNode(node: ASTNode): ASTNode =
         getChildNode(node, LINK_TEXT)
 
-    fun getLinkDestination(node:ASTNode):ASTNode =
+    fun getLinkDestination(node: ASTNode): ASTNode =
         getChildNode(node, LINK_DESTINATION)
 
 
