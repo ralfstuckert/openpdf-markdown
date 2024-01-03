@@ -44,10 +44,12 @@ asdfsd [link test ![image search api](https://user-images.githubusercontent.com/
 
 
 
-    val registry = ElementProviderRegistry(defaultRenderContext).apply {
-        registerRenderContextFunction(ElementProviderRenderContextKey(ATX_3.name)) {
+    val renderContextBase = defaultRenderContext.derive {
+        this[PdfRenderContextKeys.FONT_FAMILY] = Font.TIMES_ROMAN
+    }
+    val registry = ElementProviderRegistry(renderContextBase).apply {
+        registerRenderContextFunction(ElementProviderRenderContextKey(ATX_3.name), true) {
             derive {
-                this[PdfRenderContextKeys.FONT_SIZE] = 40f
                 this[PdfRenderContextKeys.FONT_STYLE] = Font.BOLDITALIC
             }
         }

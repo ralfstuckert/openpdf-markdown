@@ -20,7 +20,7 @@ class LinkProvider : AbstractElementProvider() {
         registry.registerRenderContextFunction(INLINE_LINK_RENDER_CONTEXT_KEY) {
             derive {
                 this[UNDERLINE_THICKNESS] = this@registerRenderContextFunction.fontSize *  0.07f
-                this[FONT_COLOR] = PdfRenderContextDefaults.fontColor
+                this[FONT_COLOR] = registry.defaultRenderContext.fontColor
             }
         }
     }

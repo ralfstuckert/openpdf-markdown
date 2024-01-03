@@ -21,8 +21,8 @@ And some very long sentence and some very long sentence and some very long sente
 
 asdfsd [link test ![image search api](https://user-images.githubusercontent.com/110724391/184472398-c590b47c-e1f2-41f8-87e6-2a1f68e8850d.png)](https://www.youtube.com/watch?v=3HIr0imLgxM)
 
-| Syntax      | Description | **Test Text**     |
-| :---        |    :----:   |          ---: |
+| Syntax      | Description | **Test Text** |
+| :------        |    :----:   |          ---: |
 | Header      | Title       | Here's this   |
 | Paragraph   | ![x](https://user-images.githubusercontent.com/110724391/184472398-c590b47c-e1f2-41f8-87e6-2a1f68e8850d.png|width=200)        | And more      |
 """
@@ -36,11 +36,11 @@ val text2 = """
  """
 
     val flavour: MarkdownFlavourDescriptor = GFMFlavourDescriptor()
-    val parsedTree = MarkdownParser(flavour).buildMarkdownTreeFromString(text2)
+    val parsedTree = MarkdownParser(flavour).buildMarkdownTreeFromString(text)
 
-    visit(parsedTree, text2)
+    visit(parsedTree, text)
 
-    val html = HtmlGenerator(text2, parsedTree, flavour, false).generateHtml()
+    val html = HtmlGenerator(text, parsedTree, flavour, false).generateHtml()
     println(html)
 }
 

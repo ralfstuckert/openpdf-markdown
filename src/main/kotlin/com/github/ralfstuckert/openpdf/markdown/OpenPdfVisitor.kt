@@ -14,7 +14,7 @@ class OpenPdfVisitor(val markdownText:String, val registry: ElementProviderRegis
                 ElementProviderContext(markdownText, parentPdfElement, pdfRenderContext, registry),
                 node)
         } else {
-            visitChildren(parentPdfElement, pdfRenderContext, node)
+            visitChildren(parentPdfElement, pdfRenderContext, node, trim=true)
         }
     }
 

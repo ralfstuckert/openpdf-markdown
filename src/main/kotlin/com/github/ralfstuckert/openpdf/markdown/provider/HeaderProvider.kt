@@ -11,14 +11,16 @@ import org.intellij.markdown.MarkdownElementTypes.ATX_6
 import org.intellij.markdown.MarkdownTokenTypes
 import org.intellij.markdown.MarkdownTokenTypes.Companion.ATX_CONTENT
 import org.intellij.markdown.ast.ASTNode
+import kotlin.math.round
 
 class HeaderProvider : AbstractElementProvider() {
 
     override fun setupDefaultRenderContexts(registry: ElementProviderRenderContextRegistry) {
         handledNodeTypes.forEach { elementType ->
             registry.registerRenderContextFunction(ElementProviderRenderContextKey(elementType.name)) {
+                val defaultFontSize = registry.defaultRenderContext.fontSize
                 derive {
-                    this[PdfRenderContextKeys.FONT_SIZE] = getFontSize(elementType)
+                    this[PdfRenderContextKeys.FONT_SIZE] = getFontSize(elementType, defaultFontSize)
                 }
             }
         }
@@ -33,15 +35,15 @@ class HeaderProvider : AbstractElementProvider() {
     }
 
 
-    fun getFontSize(type:IElementType) :Float =
+    fun getFontSize(type:IElementType, defaultFontSize:Float) :Float =
         when (type) {
-            ATX_1 -> 24f
-            ATX_2 -> 20f
-            ATX_3 -> 18f
-            ATX_4 -> 16f
-            ATX_5 -> 14f
-            ATX_6 -> 12f
-            else -> 12f
+            ATX_1 -> round(defaultFontSize * 2.25f)
+            ATX_2 -> round(defaultFontSize * 2)
+            ATX_3 -> round(defaultFontSize * 1.6666666f)
+            ATX_4 -> round(defaultFontSize * 1.5f)
+            ATX_5 -> round(defaultFontSize * 1.3333333f)
+            ATX_6 -> round(defaultFontSize * 1.1666666f)
+            else -> defaultFontSize
         }
 
     fun getContentNode(node:ASTNode):ASTNode =

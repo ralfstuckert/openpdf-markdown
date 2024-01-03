@@ -15,6 +15,5 @@ val defaultRenderContext = pdfRenderContext {
     this[PdfRenderContextKeys.FONT_FAMILY] = PdfRenderContextDefaults.fontFamily
     this[PdfRenderContextKeys.FONT_SIZE] = PdfRenderContextDefaults.fontSize
     this[PdfRenderContextKeys.FONT_STYLE] = PdfRenderContextDefaults.fontStyle
-
     this[PdfRenderContextKeys.FONT_COLOR] = PdfRenderContextDefaults.fontColor
 }

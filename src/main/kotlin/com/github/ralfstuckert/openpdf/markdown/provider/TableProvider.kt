@@ -22,8 +22,8 @@ class TableProvider : AbstractElementProvider() {
     override fun setupDefaultRenderContexts(registry: ElementProviderRenderContextRegistry) {
         registry.registerRenderContextFunction(TABLE_RENDER_CONTEXT_KEY) {
             derive {
-                this[PdfRenderContextKeys.BORDER_WIDTH] = 1f
-                this[PdfRenderContextKeys.BORDER_COLOR] = PdfRenderContextDefaults.fontColor
+                this[PdfRenderContextKeys.BORDER_WIDTH] = this@registerRenderContextFunction[PdfRenderContextKeys.BORDER_WIDTH] ?: 1f
+                this[PdfRenderContextKeys.BORDER_COLOR] = this@registerRenderContextFunction.fontColor
             }
         }
     }
