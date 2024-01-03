@@ -30,7 +30,8 @@ class ElementProviderRegistry(override val defaultRenderContext:PdfRenderContext
             EOLProvider(),
             HeaderProvider(),
             LinkProvider(),
-            ImageProvider()
+            ImageProvider(),
+            TableProvider()
         )
             .flatMap { provider ->
                 provider.setupDefaultRenderContexts(this)

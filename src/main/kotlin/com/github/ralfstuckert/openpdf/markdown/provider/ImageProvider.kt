@@ -43,7 +43,7 @@ class ImageProvider : AbstractElementProvider() {
     }
 
     fun getUrlWidthHeight(destinationText: String): Triple<String, Int?, Int?> {
-        val regex = Regex("""([^|]*)(\|(.*))?""")
+        val regex = Regex("""([^{]*)(\{(.*)})?""")
 
         val result = regex.find(destinationText)
         val url = result?.groupValues?.get(1) ?: destinationText
