@@ -32,14 +32,14 @@ fun main() {
   Would you do with a **drunken** _sailor_?
 And some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence 
 
-![image search api](https://user-images.githubusercontent.com/110724391/184472398-c590b47c-e1f2-41f8-87e6-2a1f68e8850d.png{width=200})
+<img url="https://user-images.githubusercontent.com/110724391/184472398-c590b47c-e1f2-41f8-87e6-2a1f68e8850d.png" width=200 />
 
 asdfsd [link test ![image search api](https://user-images.githubusercontent.com/110724391/184472398-c590b47c-e1f2-41f8-87e6-2a1f68e8850d.png{width=200})](https://www.youtube.com/watch?v=3HIr0imLgxM)
 
 | **Syntax**      | Description | **Test Text**     |
 | :---        |    :----------:   |          ---: |
 | Header      | Title       | Here's this   |
-| Paragraph   | Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text | Text Text Text Text Text Text Text  ![image search api](https://user-images.githubusercontent.com/110724391/184472398-c590b47c-e1f2-41f8-87e6-2a1f68e8850d.png{width=20}) |
+| Paragraph   | Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text | Text Text Text Text Text Text Text  <img url="https://user-images.githubusercontent.com/110724391/184472398-c590b47c-e1f2-41f8-87e6-2a1f68e8850d.png" width="20" /> |
 """
 
 

@@ -9,7 +9,11 @@ import org.intellij.markdown.ast.getTextInNode
 import java.net.URL
 
 
-class ImageProvider : AbstractElementProvider() {
+interface ImageProcessor {
+    fun processImage(visitor: OpenPdfVisitor, providerContext: ElementProviderContext, imageUrl:String, width:Float?, height:Float?)
+}
+
+class ImageProvider : ImageProcessor, AbstractElementProvider() {
 
     companion object {
         val IMAGE_RENDER_CONTEXT_KEY = ElementProviderRenderContextKey(MarkdownElementTypes.IMAGE.name)
@@ -29,8 +33,17 @@ class ImageProvider : AbstractElementProvider() {
 //        val alternativeText = getLinkTextNode(node).getTextInNode(markdownText).toString()
         val destination = getLinkDestination(node).getTextInNode(providerContext.markdownText).toString()
         val (url, width, height) = getUrlWidthHeight(destination)
+        processImage(visitor, providerContext, url, width?.toFloat(), height?.toFloat())
+    }
 
-        val image = Image.getInstance(URL(url)).apply {
+    override fun processImage(
+        visitor: OpenPdfVisitor,
+        providerContext: ElementProviderContext,
+        imageUrl: String,
+        width: Float?,
+        height: Float?
+    ) {
+        val image = Image.getInstance(URL(imageUrl)).apply {
             scaleToFit(
                 width?.toFloat() ?: this.width,
                 height?.toFloat() ?: this.height
@@ -41,6 +54,8 @@ class ImageProvider : AbstractElementProvider() {
             .applyPdfRenderContext(imageRenderContext)
         providerContext.parentPdfElement.add(chunk)
     }
+
+
 
     fun getUrlWidthHeight(destinationText: String): Triple<String, Int?, Int?> {
         val regex = Regex("""([^{]*)(\{(.*)})?""")
@@ -71,13 +86,3 @@ class ImageProvider : AbstractElementProvider() {
 
 }
 
-fun main() {
-    val regex = Regex("""(.*)(|.*)?""")
-
-    val text = "https://user-images.githubusercontent.com|width=200,height=100"
-    val result = regex.find(text)
-    val url = result?.groupValues?.get(1)
-    val width = result?.groupValues?.get(2)
-    println(url)
-    println(width)
-}
