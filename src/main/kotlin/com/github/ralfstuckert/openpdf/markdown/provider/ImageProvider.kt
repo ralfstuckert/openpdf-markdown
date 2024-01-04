@@ -10,7 +10,7 @@ import java.net.URL
 
 
 interface ImageProcessor {
-    fun processImage(visitor: OpenPdfVisitor, providerContext: ElementProviderContext, imageUrl:String, width:Float?, height:Float?)
+    fun processImage(visitor: OpenPdfVisitor, providerContext: ElementProviderContext, imageUrl:String, width:Float?=null, height:Float?=null)
 }
 
 class ImageProvider : ImageProcessor, AbstractElementProvider() {
@@ -31,9 +31,8 @@ class ImageProvider : ImageProcessor, AbstractElementProvider() {
     ) {
         checkNodeType(node)
 //        val alternativeText = getLinkTextNode(node).getTextInNode(markdownText).toString()
-        val destination = getLinkDestination(node).getTextInNode(providerContext.markdownText).toString()
-        val (url, width, height) = getUrlWidthHeight(destination)
-        processImage(visitor, providerContext, url, width?.toFloat(), height?.toFloat())
+        val url = getLinkDestination(node).getTextInNode(providerContext.markdownText).toString()
+        processImage(visitor, providerContext, url)
     }
 
     override fun processImage(
@@ -45,8 +44,8 @@ class ImageProvider : ImageProcessor, AbstractElementProvider() {
     ) {
         val image = Image.getInstance(URL(imageUrl)).apply {
             scaleToFit(
-                width?.toFloat() ?: this.width,
-                height?.toFloat() ?: this.height
+                width ?: this.width,
+                height ?: this.height
             )
         }
         val imageRenderContext = providerContext.deriveRenderContext(IMAGE_RENDER_CONTEXT_KEY)
@@ -55,27 +54,6 @@ class ImageProvider : ImageProcessor, AbstractElementProvider() {
         providerContext.parentPdfElement.add(chunk)
     }
 
-
-
-    fun getUrlWidthHeight(destinationText: String): Triple<String, Int?, Int?> {
-        val regex = Regex("""([^{]*)(\{(.*)})?""")
-
-        val result = regex.find(destinationText)
-        val url = result?.groupValues?.get(1) ?: destinationText
-        val styles = result?.groupValues?.get(3)
-        val stylesMap = styles?.split(',')?.map {
-            val keyValuePair = it.split('=')
-            if (keyValuePair.size == 2) keyValuePair[0] to keyValuePair[1] else null
-        }?.filterNotNull()?.toMap() ?: emptyMap()
-
-        val width = stylesMap["width"]?.toIntOrNull()
-        val height = stylesMap["height"]?.toIntOrNull()
-
-        return Triple(url, width, height)
-    }
-
-    fun getLinkTextNode(node: ASTNode): ASTNode =
-        getChildNode(getInlineLink(node), MarkdownElementTypes.LINK_TEXT)
 
     fun getLinkDestination(node: ASTNode): ASTNode =
         getChildNode(getInlineLink(node), MarkdownElementTypes.LINK_DESTINATION)

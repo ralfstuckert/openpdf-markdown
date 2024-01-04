@@ -26,15 +26,19 @@ class OpenPdfMarkdownGenerator {
 }
 
 fun main() {
+
+    val document: Document = Document()
+    val maxWidth = document.right() - document.left()
+
     val simpleText = "sdfjlsdf"
     val text = """
 ### This is [a](http://wtf) Test
   Would you do with a **drunken** _sailor_?
 And some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence 
 
-<img url="https://user-images.githubusercontent.com/110724391/184472398-c590b47c-e1f2-41f8-87e6-2a1f68e8850d.png" width=200 />
+<img url="https://user-images.githubusercontent.com/110724391/184472398-c590b47c-e1f2-41f8-87e6-2a1f68e8850d.png" width=$maxWidth />
 
-asdfsd [link test ![image search api](https://user-images.githubusercontent.com/110724391/184472398-c590b47c-e1f2-41f8-87e6-2a1f68e8850d.png{width=200})](https://www.youtube.com/watch?v=3HIr0imLgxM)
+asdfsd [link test <img url="https://user-images.githubusercontent.com/110724391/184472398-c590b47c-e1f2-41f8-87e6-2a1f68e8850d.png" width=200 />](https://www.youtube.com/watch?v=3HIr0imLgxM)
 
 | **Syntax**      | Description | **Test Text**     |
 | :---        |    :----------:   |          ---: |
@@ -74,15 +78,16 @@ asdfsd [link test ![image search api](https://user-images.githubusercontent.com/
         }
     }
 
-    val document: Document = Document()
-    document.use {
         PdfWriter.getInstance(
             document,
             FileOutputStream("markdown.pdf")
-        )
-        document.open()
-        val markdown = OpenPdfMarkdownGenerator().generate(text, registry)
-        document.add(markdown)
-    }
+        ).apply {
+            setStrictImageSequence(true)
+        }.use {
+            document.open()
+            val markdown = OpenPdfMarkdownGenerator().generate(text, registry)
+            document.add(markdown)
+            document.close()
+        }
 
 }
