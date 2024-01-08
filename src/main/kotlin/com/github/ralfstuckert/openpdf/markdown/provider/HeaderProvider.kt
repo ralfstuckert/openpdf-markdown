@@ -2,6 +2,7 @@ package com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provide
 
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.*
 import org.intellij.markdown.IElementType
+import org.intellij.markdown.MarkdownElementTypes
 import org.intellij.markdown.MarkdownElementTypes.ATX_1
 import org.intellij.markdown.MarkdownElementTypes.ATX_2
 import org.intellij.markdown.MarkdownElementTypes.ATX_3
@@ -14,6 +15,15 @@ import org.intellij.markdown.ast.ASTNode
 import kotlin.math.round
 
 class HeaderProvider : AbstractElementProvider() {
+
+    companion object {
+        val HEADER_1_RENDER_CONTEXT_KEY = ElementProviderRenderContextKey(MarkdownElementTypes.ATX_1.name)
+        val HEADER_2_RENDER_CONTEXT_KEY = ElementProviderRenderContextKey(MarkdownElementTypes.ATX_2.name)
+        val HEADER_3_RENDER_CONTEXT_KEY = ElementProviderRenderContextKey(MarkdownElementTypes.ATX_3.name)
+        val HEADER_4_RENDER_CONTEXT_KEY = ElementProviderRenderContextKey(MarkdownElementTypes.ATX_4.name)
+        val HEADER_5_RENDER_CONTEXT_KEY = ElementProviderRenderContextKey(MarkdownElementTypes.ATX_5.name)
+        val HEADER_6_RENDER_CONTEXT_KEY = ElementProviderRenderContextKey(MarkdownElementTypes.ATX_6.name)
+    }
 
     override fun setupDefaultRenderContexts(registry: ElementProviderRenderContextRegistry) {
         handledNodeTypes.forEach { elementType ->
