@@ -155,7 +155,8 @@ class TableProvider : AbstractElementProvider() {
                 }
                 GFMTokenTypes.CELL -> {
                     val nextCell = processCellNode(visitor, renderContext, child)
-                    val nextList = if (paragraph != null) list+TableCell(paragraph, colspan) else list
+                    val actualColspan = if (colspan > 0) colspan else 1
+                    val nextList = if (paragraph != null) list+TableCell(paragraph, actualColspan) else list
                     Triple(nextList, nextCell, 0)
                 }
                 else -> Triple(list, paragraph, colspan)
