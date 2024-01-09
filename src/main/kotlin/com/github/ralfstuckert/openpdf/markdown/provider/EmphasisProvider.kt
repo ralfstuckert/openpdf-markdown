@@ -1,0 +1,32 @@
+package com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider
+
+import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.*
+import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.FONT_STYLE
+import com.lowagie.text.*
+import org.intellij.markdown.MarkdownElementTypes
+import org.intellij.markdown.ast.ASTNode
+
+class EmphasisProvider : AbstractElementProvider() {
+
+    companion object {
+        val EMPHASIS_RENDER_CONTEXT_KEY = ElementProviderRenderContextKey(MarkdownElementTypes.EMPH.name)
+    }
+
+    override val handledNodeTypes = listOf(MarkdownElementTypes.EMPH)
+
+    override fun setupDefaultRenderContexts(registry: ElementProviderRenderContextRegistry) {
+        registry.registerRenderContextFunction(EMPHASIS_RENDER_CONTEXT_KEY) {
+            derive {
+                this[FONT_STYLE] = this@registerRenderContextFunction.fontStyle.or(Font.ITALIC)
+            }
+        }
+    }
+
+    override fun processNode(visitor: OpenPdfVisitor, providerContext: ElementProviderContext, node: ASTNode) {
+        checkNodeType(node)
+        val boldRenderContext = providerContext.deriveRenderContext(EMPHASIS_RENDER_CONTEXT_KEY)
+        visitor.visitChildren(providerContext.parentPdfElement, boldRenderContext, node)
+    }
+
+
+}
