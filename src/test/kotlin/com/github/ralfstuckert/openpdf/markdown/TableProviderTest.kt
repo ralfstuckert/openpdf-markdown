@@ -4,12 +4,8 @@ import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.ElementP
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.defaultRenderContext
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.derive
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.HeaderProvider.Companion.HEADER_3_RENDER_CONTEXT_KEY
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.StrongProvider.Companion.STRONG_RENDER_CONTEXT_KEY
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.TableProvider.Companion.TABLE_RENDER_CONTEXT_KEY
-import com.lowagie.text.Font
 import org.junit.jupiter.api.Test
-import rst.pdftools.compare.assertPdfEquals
 import java.awt.Color
 import java.io.File
 
@@ -19,13 +15,13 @@ class TableProviderTest {
     fun header() {
         val doc = document {
             paragraph {
+                +"A simple table"
                 +"""
                     | **Column 1** | **Column 2** | **Column 3** |
                     |----------|----------|----------|
                     | Hello there, what's going on | Beat's me | The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog |
                     | | hihi | |
-                    
-                                        
+                                                            
                 """.trimIndent()
             }
 
@@ -34,7 +30,7 @@ class TableProviderTest {
                     registerRenderContextFunction(TABLE_RENDER_CONTEXT_KEY, true) {
                         derive {
                             this[PdfRenderContextKeys.WIDTH_PERCENTAGE] = 80f
-                            this[PdfRenderContextKeys.WEIGHTED_WIDTHS] = true
+                            this[PdfRenderContextKeys.WEIGHTED_WIDTHS_ENABLED] = true
                         }
                     }
                 }
@@ -84,6 +80,25 @@ class TableProviderTest {
                     
                """.trimIndent()
             }
+
+            paragraph {
+                elementProviderRegistry = ElementProviderRegistry(defaultRenderContext).apply {
+                    registerRenderContextFunction(TABLE_RENDER_CONTEXT_KEY, true) {
+                        derive {
+                            this[PdfRenderContextKeys.COLSPAN_ENABLED] = true
+                        }
+                    }
+                }
+                +"A table using colspan"
+                +"""
+                    | **Column 1** | **Column 2** | **Column 3** | **Column 4** | **Column 5** |
+                    |----------|----------|----------|----------|----------|
+                    | one | two | three | four | five |
+                    | Hello there, what's going on | The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog ||| yeehaw |             
+                                        
+                """.trimIndent()
+            }
+
         }
         File("table.pdf").writeBytes(doc)
         doc shouldEqual "table.pdf"

@@ -1,6 +1,7 @@
 package com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider
 
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.*
+import com.lowagie.text.Chunk
 import com.lowagie.text.Paragraph
 import com.lowagie.text.Rectangle
 import com.lowagie.text.pdf.PdfPCell
@@ -25,7 +26,8 @@ class TableProvider : AbstractElementProvider() {
                 this[PdfRenderContextKeys.BORDER_WIDTH] = registry.defaultRenderContext[PdfRenderContextKeys.BORDER_WIDTH] ?: 1f
                 this[PdfRenderContextKeys.BORDER_COLOR] = registry.defaultRenderContext.fontColor
                 this[PdfRenderContextKeys.WIDTH_PERCENTAGE] = registry.defaultRenderContext[PdfRenderContextKeys.WIDTH_PERCENTAGE] ?: 100f
-                this[PdfRenderContextKeys.WEIGHTED_WIDTHS] = registry.defaultRenderContext[PdfRenderContextKeys.WEIGHTED_WIDTHS] ?: false
+                this[PdfRenderContextKeys.WEIGHTED_WIDTHS_ENABLED] = registry.defaultRenderContext[PdfRenderContextKeys.WEIGHTED_WIDTHS_ENABLED] ?: false
+                this[PdfRenderContextKeys.COLSPAN_ENABLED] = registry.defaultRenderContext[PdfRenderContextKeys.COLSPAN_ENABLED] ?: false
             }
         }
     }
@@ -36,11 +38,11 @@ class TableProvider : AbstractElementProvider() {
         checkNodeType(node)
 
         val tableRenderContext = providerContext.deriveRenderContext(TABLE_RENDER_CONTEXT_KEY)
+        val weightedWidthsEnabled = tableRenderContext[PdfRenderContextKeys.WEIGHTED_WIDTHS_ENABLED] ?: false
+        val colspanEnabled = tableRenderContext[PdfRenderContextKeys.COLSPAN_ENABLED] ?: false
 
-        val headers = processHeaderNode(visitor, tableRenderContext, getHeader(node))
-
-        val weightedWidths = tableRenderContext[PdfRenderContextKeys.WEIGHTED_WIDTHS] ?: false
-        val rowDescriptor = processRowDescriptor(providerContext.markdownText, getRowDescriptor(node), weightedWidths)
+        val headers = processHeaderNode(visitor, tableRenderContext, getHeader(node), colspanEnabled)
+        val rowDescriptor = processRowDescriptor(providerContext.markdownText, getRowDescriptor(node), weightedWidthsEnabled)
         val borderDescriptor = tableRenderContext.getBorderDescriptor()
 
         val relativeWidths = rowDescriptor.columnDescriptors.map { it.weight }.toFloatArray()
@@ -54,7 +56,7 @@ class TableProvider : AbstractElementProvider() {
         }
 
         val rows = node.children.map {
-            if (it.type == GFMElementTypes.ROW) processRowNode(visitor, tableRenderContext, it) else null
+            if (it.type == GFMElementTypes.ROW) processRowNode(visitor, tableRenderContext, it, colspanEnabled) else null
         }.filterNotNull()
 
         rows.forEach { row ->
@@ -67,8 +69,9 @@ class TableProvider : AbstractElementProvider() {
         providerContext.parentPdfElement.add(table)
     }
 
-    fun createCell(paragraph: Paragraph, index:Int, rowDescriptor: TableRowDescriptor, borderDescriptor:BorderDescriptor) =
-        PdfPCell(paragraph).apply {
+    fun createCell(tableCell: TableCell, index:Int, rowDescriptor: TableRowDescriptor, borderDescriptor:BorderDescriptor) =
+        PdfPCell(tableCell.paragraph).apply {
+            colspan = tableCell.colspan
             horizontalAlignment = rowDescriptor[index].alignment.ordinal
             borderColor = borderDescriptor.color
             borderWidth = borderDescriptor.width
@@ -110,27 +113,53 @@ class TableProvider : AbstractElementProvider() {
     fun processHeaderNode(
         visitor: OpenPdfVisitor,
         renderContext: PdfRenderContext,
-        node: ASTNode
-    ): List<Paragraph> =
-        processTableRow(GFMElementTypes.HEADER, visitor, renderContext, node)
+        node: ASTNode,
+        colspanEnabled:Boolean
+    ): List<TableCell> =
+        processTableRow(GFMElementTypes.HEADER, visitor, renderContext, node, colspanEnabled)
 
     fun processRowNode(
         visitor: OpenPdfVisitor,
         renderContext: PdfRenderContext,
-        node: ASTNode
-    ): List<Paragraph> =
-        processTableRow(GFMElementTypes.ROW, visitor, renderContext, node)
+        node: ASTNode,
+        colspanEnabled:Boolean
+    ): List<TableCell> =
+        processTableRow(GFMElementTypes.ROW, visitor, renderContext, node, colspanEnabled)
 
     fun processTableRow(
         expectedElementType: IElementType,
         visitor: OpenPdfVisitor,
         renderContext: PdfRenderContext,
-        node: ASTNode
-    ): List<Paragraph> {
+        node: ASTNode,
+        colspanEnabled:Boolean
+    ): List<TableCell> {
         assert(node.type == expectedElementType) { "expected $expectedElementType but is '${node.type}'" }
-        return node.children.map {
-            if (it.type == GFMTokenTypes.CELL) processCellNode(visitor, renderContext, it) else null
-        }.filterNotNull()
+        val children = node.children
+        val (list, paragraph, colspan) = children.foldIndexed(Triple<List<TableCell>, Paragraph?, Int>(listOf<TableCell>(), null, 0)) { index, (list, paragraph, colspan), child ->
+            when (child.type) {
+                GFMTokenTypes.TABLE_SEPARATOR -> {
+                    if (index == 0)
+                        Triple(list, paragraph, colspan)
+                    else {
+                        if (colspanEnabled)
+                            Triple(list, paragraph ?: Paragraph(Chunk("")), colspan + 1)
+                        else {
+                            val tableCell = TableCell(paragraph ?: Paragraph(Chunk("")), 1)
+                            Triple(list+tableCell, null, 0)
+                        }
+                    }
+                }
+                GFMTokenTypes.CELL -> {
+                    val nextCell = processCellNode(visitor, renderContext, child)
+                    val nextList = if (paragraph != null) list+TableCell(paragraph, colspan) else list
+                    Triple(nextList, nextCell, 0)
+                }
+                else -> Triple(list, paragraph, colspan)
+            }
+        }
+        return if (paragraph != null)
+            list + TableCell(paragraph, colspan)
+        else list
     }
 
     fun processCellNode(visitor: OpenPdfVisitor, renderContext: PdfRenderContext, node: ASTNode): Paragraph {
@@ -148,6 +177,8 @@ class TableProvider : AbstractElementProvider() {
 
 
 }
+
+data class TableCell(val paragraph: Paragraph, val colspan:Int =1)
 
 enum class TableColumnAlignment {
     left, center, right

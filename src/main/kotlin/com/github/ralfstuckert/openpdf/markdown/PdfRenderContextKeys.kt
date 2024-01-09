@@ -14,7 +14,9 @@ object PdfRenderContextKeys {
     val BORDER_COLOR = PdfRenderContextKey<Color>("BORDER_COLOR")
 
     val WIDTH_PERCENTAGE = PdfRenderContextKey<Float>("WIDTH_PERCENTAGE")
-    val WEIGHTED_WIDTHS = PdfRenderContextKey<Boolean>("WEIGHTED_WIDTHS")
+    val WEIGHTED_WIDTHS_ENABLED = PdfRenderContextKey<Boolean>("WEIGHTED_WIDTHS")
+    val COLSPAN_ENABLED = PdfRenderContextKey<Boolean>("COLSPAN_ENABLED")
+
 }
 
 
