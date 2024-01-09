@@ -3,7 +3,6 @@ package com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provide
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.*
 import com.lowagie.text.*
 import org.intellij.markdown.MarkdownElementTypes
-import org.intellij.markdown.MarkdownTokenTypes
 import org.intellij.markdown.ast.ASTNode
 import org.intellij.markdown.ast.getTextInNode
 import java.net.URL
@@ -43,10 +42,11 @@ class ImageProvider : ImageProcessor, AbstractElementProvider() {
         height: Float?
     ) {
         val image = Image.getInstance(URL(imageUrl)).apply {
-            scaleToFit(
-                width ?: this.width,
-                height ?: this.height
-            )
+            when {
+                width != null && height != null -> scaleAbsolute(width, height)
+                width != null -> scalePercent(width * 100.0f / this.scaledWidth)
+                height != null -> scalePercent(height * 100.0f / this.scaledHeight)
+            }
         }
         val imageRenderContext = providerContext.deriveRenderContext(IMAGE_RENDER_CONTEXT_KEY)
         val chunk = Chunk(image, 0f, 0f, true)
