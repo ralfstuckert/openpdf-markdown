@@ -1,5 +1,6 @@
 package com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown
 
+import com.lowagie.text.Element
 import java.awt.Color
 
 object PdfRenderContextKeys {
@@ -14,10 +15,14 @@ object PdfRenderContextKeys {
     val BORDER_COLOR = PdfRenderContextKey<Color>("BORDER_COLOR")
 
     val WIDTH_PERCENTAGE = PdfRenderContextKey<Float>("WIDTH_PERCENTAGE")
+    val HORIZONTAL_ALIGNMENT = PdfRenderContextKey<HorizontalAlignment>("HORIZONTAL_ALIGNMENT")
+
     val WEIGHTED_WIDTHS_ENABLED = PdfRenderContextKey<Boolean>("WEIGHTED_WIDTHS")
     val COLSPAN_ENABLED = PdfRenderContextKey<Boolean>("COLSPAN_ENABLED")
 
 }
 
 
-
+enum class HorizontalAlignment {
+    left, center, right
+}

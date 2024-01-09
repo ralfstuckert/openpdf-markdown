@@ -2,6 +2,7 @@ package com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provide
 
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.*
 import com.lowagie.text.Chunk
+import com.lowagie.text.Element
 import com.lowagie.text.Paragraph
 import com.lowagie.text.Rectangle
 import com.lowagie.text.pdf.PdfPCell
@@ -28,6 +29,7 @@ class TableProvider : AbstractElementProvider() {
                 this[PdfRenderContextKeys.WIDTH_PERCENTAGE] = registry.defaultRenderContext[PdfRenderContextKeys.WIDTH_PERCENTAGE] ?: 100f
                 this[PdfRenderContextKeys.WEIGHTED_WIDTHS_ENABLED] = registry.defaultRenderContext[PdfRenderContextKeys.WEIGHTED_WIDTHS_ENABLED] ?: false
                 this[PdfRenderContextKeys.COLSPAN_ENABLED] = registry.defaultRenderContext[PdfRenderContextKeys.COLSPAN_ENABLED] ?: false
+                this[PdfRenderContextKeys.HORIZONTAL_ALIGNMENT] = registry.defaultRenderContext[PdfRenderContextKeys.HORIZONTAL_ALIGNMENT] ?: HorizontalAlignment.center
             }
         }
     }
@@ -40,6 +42,7 @@ class TableProvider : AbstractElementProvider() {
         val tableRenderContext = providerContext.deriveRenderContext(TABLE_RENDER_CONTEXT_KEY)
         val weightedWidthsEnabled = tableRenderContext[PdfRenderContextKeys.WEIGHTED_WIDTHS_ENABLED] ?: false
         val colspanEnabled = tableRenderContext[PdfRenderContextKeys.COLSPAN_ENABLED] ?: false
+        val alignment = tableRenderContext[PdfRenderContextKeys.HORIZONTAL_ALIGNMENT] ?: HorizontalAlignment.center
 
         val headers = processHeaderNode(visitor, tableRenderContext, getHeader(node), colspanEnabled)
         val rowDescriptor = processRowDescriptor(providerContext.markdownText, getRowDescriptor(node), weightedWidthsEnabled)
@@ -48,6 +51,7 @@ class TableProvider : AbstractElementProvider() {
         val relativeWidths = rowDescriptor.columnDescriptors.map { it.weight }.toFloatArray()
         val table = PdfPTable(relativeWidths).apply {
             widthPercentage = tableRenderContext[PdfRenderContextKeys.WIDTH_PERCENTAGE] ?: 100f
+            horizontalAlignment = alignment.ordinal
         }
 
         headers.forEachIndexed { index, paragraph ->
