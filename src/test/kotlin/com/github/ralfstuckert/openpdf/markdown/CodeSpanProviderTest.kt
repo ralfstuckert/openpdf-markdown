@@ -1,14 +1,9 @@
 package com.github.ralfstuckert.openpdf.markdown
 
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.ElementProviderRegistry
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.defaultRenderContext
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.derive
+import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.*
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.CodeSpanProvider
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.StrongProvider.Companion.STRONG_RENDER_CONTEXT_KEY
 import com.lowagie.text.Font
 import org.junit.jupiter.api.Test
-import rst.pdftools.compare.assertPdfEquals
 import java.awt.Color
 import java.io.File
 
@@ -34,14 +29,15 @@ class CodeSpanProviderTest {
             paragraph {
                 elementProviderRegistry = ElementProviderRegistry(defaultRenderContext).apply {
                     registerRenderContextFunction(CodeSpanProvider.CODE_SPAN_RENDER_CONTEXT_KEY, true) {
+                        val parentRenderContext = this
                         derive {
                             this[PdfRenderContextKeys.FONT_COLOR] = Color.blue
                             this[PdfRenderContextKeys.FONT_STYLE] = Font.BOLD
-                            this[PdfRenderContextKeys.FONT_SIZE] = 9f
+                            this[PdfRenderContextKeys.FONT_SIZE] = parentRenderContext.fontSize * 0.9f
                         }
                     }
                 }
-                +"let's change the rendering of inline code `to blue bold with size 9` or whatever you want"
+                +"let's change the rendering of inline code `to blue bold with a slightly smaller font` or whatever you want"
             }
         }
         File("codespan.pdf").writeBytes(doc)
