@@ -28,6 +28,7 @@ class ElementProviderRegistry(override val defaultRenderContext:PdfRenderContext
             TextProvider(),
             StrongProvider(),
             EmphasisProvider(),
+            CodeSpanProvider(),
             EOLProvider(),
             HeaderProvider(),
             LinkProvider(),
