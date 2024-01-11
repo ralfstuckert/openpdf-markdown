@@ -3,23 +3,21 @@ package com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provide
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.*
 import com.lowagie.text.Chunk
 import com.lowagie.text.Font
-import org.intellij.markdown.MarkdownElementTypes
 import org.intellij.markdown.MarkdownElementTypes.CODE_SPAN
-import org.intellij.markdown.MarkdownTokenTypes
 import org.intellij.markdown.MarkdownTokenTypes.Companion.BACKTICK
 import org.intellij.markdown.ast.ASTNode
 import org.intellij.markdown.ast.getTextInNode
 
-class CodeSpanProvider : AbstractElementProvider() {
+class InlineCodeProvider : AbstractElementProvider() {
 
     companion object {
-        val CODE_SPAN_RENDER_CONTEXT_KEY = ElementProviderRenderContextKey(CODE_SPAN.name)
+        val INLINE_CODE_RENDER_CONTEXT_KEY = ElementProviderRenderContextKey(CODE_SPAN.name)
     }
 
     override val handledNodeTypes = listOf(CODE_SPAN)
 
     override fun setupDefaultRenderContexts(registry: ElementProviderRenderContextRegistry) {
-        registry.registerRenderContextFunction(CODE_SPAN_RENDER_CONTEXT_KEY) {
+        registry.registerRenderContextFunction(INLINE_CODE_RENDER_CONTEXT_KEY) {
             derive {
                 this[PdfRenderContextKeys.FONT_FAMILY] = Font.COURIER
             }
@@ -28,7 +26,7 @@ class CodeSpanProvider : AbstractElementProvider() {
 
     override fun processNode(visitor: OpenPdfVisitor, providerContext: ElementProviderContext, node: ASTNode) {
         checkNodeType(node)
-        val codespanRenderContext = providerContext.deriveRenderContext(CODE_SPAN_RENDER_CONTEXT_KEY)
+        val codespanRenderContext = providerContext.deriveRenderContext(INLINE_CODE_RENDER_CONTEXT_KEY)
         getCodespanText(node, providerContext.markdownText)
             .map {
                 Chunk(it).applyPdfRenderContext(codespanRenderContext)
@@ -57,8 +55,3 @@ class CodeSpanProvider : AbstractElementProvider() {
 fun String.isLinebreak() =
     this == "\r" ||this == "\n" ||this == "\r\n"
 
-fun main() {
-    "hallo".lines().forEach {
-        println("'$it'")
-    }
-}
