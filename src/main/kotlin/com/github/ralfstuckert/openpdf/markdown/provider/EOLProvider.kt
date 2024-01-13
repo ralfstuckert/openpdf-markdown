@@ -5,7 +5,6 @@ import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.ElementP
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.ElementProviderRenderContextRegistry
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.OpenPdfVisitor
 import com.lowagie.text.Chunk
-import org.intellij.markdown.MarkdownElementTypes
 import org.intellij.markdown.MarkdownTokenTypes.Companion.EOL
 import org.intellij.markdown.ast.ASTNode
 import org.intellij.markdown.ast.getTextInNode

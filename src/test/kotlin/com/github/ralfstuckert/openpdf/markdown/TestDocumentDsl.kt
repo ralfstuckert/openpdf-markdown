@@ -4,6 +4,7 @@ import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.ElementP
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.OpenPdfMarkdownGenerator
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.defaultRenderContext
 import com.lowagie.text.*
+import com.lowagie.text.pdf.PdfPageEvent
 import com.lowagie.text.pdf.PdfWriter
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
@@ -41,7 +42,54 @@ class DocumentBuilder {
     internal fun build():ByteArray =
         with(ByteArrayOutputStream()) {
             val document: Document = Document(size.rectangle, marginLeft, marginRight, marginTop, marginBottom)
-            PdfWriter.getInstance(document, this)
+            PdfWriter.getInstance(document, this).apply {
+                pageEvent = object:PdfPageEvent {
+                    override fun onOpenDocument(p0: PdfWriter?, p1: Document?) {
+                        println("onOpenDocument")
+                    }
+
+                    override fun onStartPage(p0: PdfWriter?, p1: Document?) {
+                        println("onStartPage")
+                    }
+
+                    override fun onEndPage(p0: PdfWriter?, p1: Document?) {
+                        println("onEndPage")
+                    }
+
+                    override fun onCloseDocument(p0: PdfWriter?, p1: Document?) {
+                        println("onCloseDocument")
+                    }
+
+                    override fun onParagraph(p0: PdfWriter?, p1: Document?, p2: Float) {
+                        println("onParagraph $p2")
+                    }
+
+                    override fun onParagraphEnd(p0: PdfWriter?, p1: Document?, p2: Float) {
+                        println("onParagraphEnd $p2")
+                    }
+
+                    override fun onChapter(p0: PdfWriter?, p1: Document?, p2: Float, p3: Paragraph?) {
+                        println("onChapter")
+                    }
+
+                    override fun onChapterEnd(p0: PdfWriter?, p1: Document?, p2: Float) {
+                        println("onChapterEnd")
+                    }
+
+                    override fun onSection(p0: PdfWriter?, p1: Document?, p2: Float, p3: Int, p4: Paragraph?) {
+                        println("onSection")
+                    }
+
+                    override fun onSectionEnd(p0: PdfWriter?, p1: Document?, p2: Float) {
+                        println("onSectionEnd")
+                    }
+
+                    override fun onGenericTag(p0: PdfWriter?, p1: Document?, p2: Rectangle?, p3: String?) {
+                        println("onGenericTag")
+                    }
+
+                }
+            }
             document.open()
             paragraphs.forEach {
                 document.add(it)

@@ -1,8 +1,8 @@
 package com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider
 
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.*
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.FONT_COLOR
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.UNDERLINE_THICKNESS
+import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.COLOR
+import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.LINE_THICKNESS
 import com.lowagie.text.Anchor
 import org.intellij.markdown.MarkdownElementTypes.INLINE_LINK
 import org.intellij.markdown.MarkdownElementTypes.LINK_DESTINATION
@@ -19,8 +19,8 @@ class LinkProvider : AbstractElementProvider() {
     override fun setupDefaultRenderContexts(registry: ElementProviderRenderContextRegistry) {
         registry.registerRenderContextFunction(INLINE_LINK_RENDER_CONTEXT_KEY) {
             derive {
-                this[UNDERLINE_THICKNESS] = this@registerRenderContextFunction.fontSize *  0.07f
-                this[FONT_COLOR] = registry.defaultRenderContext.fontColor
+                this[LINE_THICKNESS] = this@registerRenderContextFunction.fontSize *  0.07f
+                this[COLOR] = registry.defaultRenderContext.color
             }
         }
     }

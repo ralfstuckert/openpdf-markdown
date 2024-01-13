@@ -5,10 +5,7 @@ import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRende
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.defaultRenderContext
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.derive
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.LinkProvider.Companion.INLINE_LINK_RENDER_CONTEXT_KEY
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.StrongProvider.Companion.STRONG_RENDER_CONTEXT_KEY
-import com.lowagie.text.Font
 import org.junit.jupiter.api.Test
-import rst.pdftools.compare.assertPdfEquals
 import java.awt.Color
 import java.io.File
 
@@ -38,15 +35,15 @@ class LinkProviderTest {
                 elementProviderRegistry = ElementProviderRegistry(defaultRenderContext).apply {
                     registerRenderContextFunction(INLINE_LINK_RENDER_CONTEXT_KEY, true) {
                         derive {
-                            this[PdfRenderContextKeys.FONT_COLOR] = Color.blue
-                            this[PdfRenderContextKeys.UNDERLINE_THICKNESS] = 0f
+                            this[PdfRenderContextKeys.COLOR] = Color.blue
+                            this[PdfRenderContextKeys.LINE_THICKNESS] = 0f
                         }
                     }
                 }
                 +"let's change the rendering of a link [to blue without underline](https://github.com/ralfstuckert/openpdf-markdown) or whatever you want"
             }
         }
-        File("link.pdf").writeBytes(doc)
+//        File("link.pdf").writeBytes(doc)
         doc shouldEqual "link.pdf"
 
 

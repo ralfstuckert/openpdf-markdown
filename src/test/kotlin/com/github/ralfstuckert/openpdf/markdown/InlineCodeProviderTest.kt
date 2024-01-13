@@ -31,7 +31,7 @@ class InlineCodeProviderTest {
                     registerRenderContextFunction(InlineCodeProvider.INLINE_CODE_RENDER_CONTEXT_KEY, true) {
                         val parentRenderContext = this
                         derive {
-                            this[PdfRenderContextKeys.FONT_COLOR] = Color.blue
+                            this[PdfRenderContextKeys.COLOR] = Color.blue
                             this[PdfRenderContextKeys.FONT_STYLE] = Font.BOLD
                             this[PdfRenderContextKeys.FONT_SIZE] = parentRenderContext.fontSize * 0.9f
                         }
@@ -40,7 +40,7 @@ class InlineCodeProviderTest {
                 +"let's change the rendering of inline code `to blue bold with a slightly smaller font` or whatever you want"
             }
         }
-        File("inlinecode.pdf").writeBytes(doc)
+//        File("inlinecode.pdf").writeBytes(doc)
         doc shouldEqual "inlinecode.pdf"
 
 

@@ -1,9 +1,8 @@
 package com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider
 
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.*
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.UNDERLINE_THICKNESS
+import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.LINE_THICKNESS
 import com.lowagie.text.Chunk
-import org.intellij.markdown.MarkdownTokenTypes
 import org.intellij.markdown.MarkdownTokenTypes.Companion.TEXT
 import org.intellij.markdown.MarkdownTokenTypes.Companion.WHITE_SPACE
 import org.intellij.markdown.ast.ASTNode
@@ -34,7 +33,7 @@ class TextProvider: AbstractElementProvider() {
 fun Chunk.applyPdfRenderContext(pdfRenderContext: PdfRenderContext):Chunk {
     font = pdfRenderContext.font
 
-    val underlineThickness = pdfRenderContext[UNDERLINE_THICKNESS] ?: 0f
+    val underlineThickness = pdfRenderContext[LINE_THICKNESS] ?: 0f
     if (underlineThickness != 0f) {
         setUnderline(underlineThickness, -1.75f * underlineThickness)
     }

@@ -2,7 +2,6 @@ package com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provide
 
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.*
 import com.lowagie.text.Chunk
-import com.lowagie.text.Element
 import com.lowagie.text.Paragraph
 import com.lowagie.text.Rectangle
 import com.lowagie.text.pdf.PdfPCell
@@ -25,7 +24,7 @@ class TableProvider : AbstractElementProvider() {
         registry.registerRenderContextFunction(TABLE_RENDER_CONTEXT_KEY) {
             derive {
                 this[PdfRenderContextKeys.BORDER_WIDTH] = registry.defaultRenderContext[PdfRenderContextKeys.BORDER_WIDTH] ?: 1f
-                this[PdfRenderContextKeys.BORDER_COLOR] = registry.defaultRenderContext.fontColor
+                this[PdfRenderContextKeys.BORDER_COLOR] = registry.defaultRenderContext.color
                 this[PdfRenderContextKeys.WIDTH_PERCENTAGE] = registry.defaultRenderContext[PdfRenderContextKeys.WIDTH_PERCENTAGE] ?: 100f
                 this[PdfRenderContextKeys.WEIGHTED_WIDTHS_ENABLED] = registry.defaultRenderContext[PdfRenderContextKeys.WEIGHTED_WIDTHS_ENABLED] ?: false
                 this[PdfRenderContextKeys.COLSPAN_ENABLED] = registry.defaultRenderContext[PdfRenderContextKeys.COLSPAN_ENABLED] ?: false
@@ -204,7 +203,7 @@ data class BorderDescriptor(val width:Float, val color:Color)
 
 fun PdfRenderContext.getBorderDescriptor() = BorderDescriptor(
 this[PdfRenderContextKeys.BORDER_WIDTH] ?: 1f,
-this[PdfRenderContextKeys.BORDER_COLOR] ?: PdfRenderContextDefaults.fontColor
+this[PdfRenderContextKeys.BORDER_COLOR] ?: PdfRenderContextDefaults.color
 )
 
 val String.dashCount

@@ -2,7 +2,6 @@ package com.github.ralfstuckert.openpdf.markdown
 
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.*
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.CodeBlockProvider
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.InlineCodeProvider
 import com.lowagie.text.Font
 import org.junit.jupiter.api.Test
 import java.awt.Color
@@ -29,7 +28,7 @@ class CodeBlockProviderTest {
                     registerRenderContextFunction(CodeBlockProvider.CODE_BlOCK_RENDER_CONTEXT_KEY, true) {
                         val parentRenderContext = this
                         derive {
-                            this[PdfRenderContextKeys.FONT_COLOR] = Color.blue
+                            this[PdfRenderContextKeys.COLOR] = Color.blue
                             this[PdfRenderContextKeys.FONT_STYLE] = Font.BOLD
                             this[PdfRenderContextKeys.FONT_SIZE] = parentRenderContext.fontSize * 0.9f
                         }
@@ -43,7 +42,7 @@ class CodeBlockProviderTest {
                    |**""".trimMargin()
             }
         }
-        File("codeblock.pdf").writeBytes(doc)
+//        File("codeblock.pdf").writeBytes(doc)
         doc shouldEqual "codeblock.pdf"
 
 

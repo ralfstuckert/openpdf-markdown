@@ -7,9 +7,7 @@ import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.derive
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.StrongProvider.Companion.STRONG_RENDER_CONTEXT_KEY
 import com.lowagie.text.Font
 import org.junit.jupiter.api.Test
-import rst.pdftools.compare.assertPdfEquals
 import java.awt.Color
-import java.io.File
 
 class StrongProviderTest {
 
@@ -33,7 +31,7 @@ class StrongProviderTest {
                 elementProviderRegistry = ElementProviderRegistry(defaultRenderContext).apply {
                     registerRenderContextFunction(STRONG_RENDER_CONTEXT_KEY, true) {
                         derive {
-                            this[PdfRenderContextKeys.FONT_COLOR] = Color.blue
+                            this[PdfRenderContextKeys.COLOR] = Color.blue
                             this[PdfRenderContextKeys.FONT_FAMILY] = Font.TIMES_ROMAN
                             this[PdfRenderContextKeys.FONT_SIZE] = 17f
                         }

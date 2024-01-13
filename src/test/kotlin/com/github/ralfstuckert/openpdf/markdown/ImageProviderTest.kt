@@ -1,14 +1,6 @@
 package com.github.ralfstuckert.openpdf.markdown
 
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.ElementProviderRegistry
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.defaultRenderContext
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.derive
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.StrongProvider
-import com.lowagie.text.Font
 import org.junit.jupiter.api.Test
-import java.awt.Color
-import java.io.File
 
 class ImageProviderTest {
 

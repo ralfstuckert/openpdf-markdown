@@ -5,8 +5,6 @@ import com.lowagie.text.Chunk
 import com.lowagie.text.Font
 import com.lowagie.text.Paragraph
 import org.intellij.markdown.MarkdownElementTypes.CODE_FENCE
-import org.intellij.markdown.MarkdownElementTypes.CODE_SPAN
-import org.intellij.markdown.MarkdownTokenTypes.Companion.BACKTICK
 import org.intellij.markdown.MarkdownTokenTypes.Companion.CODE_FENCE_END
 import org.intellij.markdown.MarkdownTokenTypes.Companion.CODE_FENCE_START
 import org.intellij.markdown.MarkdownTokenTypes.Companion.FENCE_LANG

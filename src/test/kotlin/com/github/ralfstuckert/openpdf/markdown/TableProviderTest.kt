@@ -7,7 +7,6 @@ import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.derive
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.TableProvider.Companion.TABLE_RENDER_CONTEXT_KEY
 import org.junit.jupiter.api.Test
 import java.awt.Color
-import java.io.File
 
 class TableProviderTest {
 
