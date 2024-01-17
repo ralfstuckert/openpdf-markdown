@@ -1,4 +1,3 @@
-* hr / page break
 * lists
 * foot notes
 * blockquote
