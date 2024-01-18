@@ -165,7 +165,7 @@ open class RomanAlphabetIndexIterator(
     private var index = 0
 
     override fun nextIndex(): String = (index++).let { next ->
-        RomanAlphabetFactory.getString(next+1, isLowercase(next)) + " "
+        RomanAlphabetFactory.getString(next+1, isLowercase(next)) + ") "
     }
 
     open fun isLowercase(index:Int) = lowercase
