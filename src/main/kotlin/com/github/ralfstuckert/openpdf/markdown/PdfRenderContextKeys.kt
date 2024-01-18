@@ -1,5 +1,6 @@
 package com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown
 
+import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.ListIndexIteratorFactory
 import java.awt.Color
 
 object PdfRenderContextKeys {
@@ -18,6 +19,7 @@ object PdfRenderContextKeys {
 
     val WEIGHTED_WIDTHS_ENABLED = PdfRenderContextKey<Boolean>("WEIGHTED_WIDTHS")
     val COLSPAN_ENABLED = PdfRenderContextKey<Boolean>("COLSPAN_ENABLED")
+    val LIST_INDEX_ITERATOR_FACTORY = PdfRenderContextKey<ListIndexIteratorFactory>("LIST_INDEX_ITERATOR_FACTORY")
 
 }
 

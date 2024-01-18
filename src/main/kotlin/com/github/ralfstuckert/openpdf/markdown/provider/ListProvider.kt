@@ -3,9 +3,11 @@ package com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provide
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.*
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.COLOR
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.LINE_THICKNESS
+import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.LIST_INDEX_ITERATOR_FACTORY
 import com.lowagie.text.Anchor
 import com.lowagie.text.Chunk
 import com.lowagie.text.ListItem
+import com.lowagie.text.factories.RomanAlphabetFactory
 import com.lowagie.text.pdf.PdfDocument.Indentation
 import org.intellij.markdown.MarkdownElementTypes.INLINE_LINK
 import org.intellij.markdown.MarkdownElementTypes.LINK_DESTINATION
@@ -24,9 +26,24 @@ class ListProvider : AbstractElementProvider() {
         val UNORDERED_LIST_RENDER_CONTEXT_KEY = ElementProviderRenderContextKey(UNORDERED_LIST.name)
     }
 
+    val defaultOrdedListIndexIteratorFactory = ListIndexIteratorFactory { listLevel: Int, parentPrefix: String ->
+        ArabicNumberIndexIterator(listLevel, parentPrefix)
+    }
+    val defaultUnordedListIndexIteratorFactory = ListIndexIteratorFactory { listLevel: Int, parentPrefix: String ->
+        RepeatingSymbolIndexIterator(listLevel, parentPrefix)
+    }
+
     override fun setupDefaultRenderContexts(registry: ElementProviderRenderContextRegistry) {
-        registry.registerRenderContextFunction(ORDERED_LIST_RENDER_CONTEXT_KEY) { this }
-        registry.registerRenderContextFunction(UNORDERED_LIST_RENDER_CONTEXT_KEY) { this }
+        registry.registerRenderContextFunction(ORDERED_LIST_RENDER_CONTEXT_KEY) {
+            derive {
+                this[LIST_INDEX_ITERATOR_FACTORY] = defaultOrdedListIndexIteratorFactory
+            }
+        }
+        registry.registerRenderContextFunction(UNORDERED_LIST_RENDER_CONTEXT_KEY) {
+            derive {
+                this[LIST_INDEX_ITERATOR_FACTORY] = defaultUnordedListIndexIteratorFactory
+            }
+        }
     }
 
     override val handledNodeTypes = listOf(ORDERED_LIST, UNORDERED_LIST)
@@ -41,22 +58,20 @@ class ListProvider : AbstractElementProvider() {
         visitor: OpenPdfVisitor,
         providerContext: ElementProviderContext,
         node: ASTNode,
+        listLevel: Int = 0,
+        listItemPrefix: String = "",
         indentation: Float = 0f,
-        listItemIndex:ListItemIndex = ListItemIndex()
     ): com.lowagie.text.List {
-        val (renderContext, factory) = when (node.type) {
-            ORDERED_LIST -> providerContext.deriveRenderContext(ORDERED_LIST_RENDER_CONTEXT_KEY) to ArabicNumberSymbolFactory()
-            else -> providerContext.deriveRenderContext(UNORDERED_LIST_RENDER_CONTEXT_KEY) to RepeatingSymbolFactory()
-        }
+        val renderContext = getRenderContext(providerContext, node)
+        val listIndexIterator = getListIndexIterator(renderContext, node, listLevel, listItemPrefix)
 
         val list = com.lowagie.text.List(false, false).apply {
             indentationLeft = indentation
         }
 
         val listItems = getListItems(node)
-        var currentIndex = listItemIndex
         listItems.forEach {
-            val listItemSymbol = factory.createSymbolFor(currentIndex)
+            val listItemSymbol = listIndexIterator.nextIndex()
             val listItem = ListItem().apply {
                 listSymbol = Chunk(listItemSymbol).applyPdfRenderContext(renderContext)
                 visitor.visitChildren(this, renderContext, getListItemParagraph(it))
@@ -64,16 +79,26 @@ class ListProvider : AbstractElementProvider() {
             list.add(listItem)
 
             getListItemSublistOrNull(it)?.let {
-                val sublistIndex = currentIndex.subIndex()
-                val sublist = createListNode(visitor, providerContext, it, 10f, sublistIndex)
+                val sublistPrefix = listIndexIterator.sublistPrefix()
+                val sublist = createListNode(visitor, providerContext, it, listLevel + 1, sublistPrefix, 10f)
                 list.add(sublist)
             }
-
-            currentIndex = currentIndex.nextIndex()
         }
         return list
     }
 
+    fun getRenderContext(providerContext: ElementProviderContext, node: ASTNode) = when (node.type) {
+        ORDERED_LIST -> providerContext.deriveRenderContext(ORDERED_LIST_RENDER_CONTEXT_KEY)
+        else -> providerContext.deriveRenderContext(UNORDERED_LIST_RENDER_CONTEXT_KEY)
+    }
+
+    fun getListIndexIterator(
+        context: PdfRenderContext, node: ASTNode,
+        listLevel: Int, listItemPrefix: String
+    ) = when (node.type) {
+        ORDERED_LIST -> context[LIST_INDEX_ITERATOR_FACTORY] ?: defaultOrdedListIndexIteratorFactory
+        else -> context[LIST_INDEX_ITERATOR_FACTORY] ?: defaultUnordedListIndexIteratorFactory
+    }.createListIndexIterator(listLevel, listItemPrefix)
 
     fun getListItemParagraph(node: ASTNode): ASTNode =
         getChildNode(node, PARAGRAPH)
@@ -86,28 +111,66 @@ class ListProvider : AbstractElementProvider() {
         node.children.filter { it.type == LIST_ITEM }
 }
 
-data class ListItemIndex(val indeces: List<Int> = listOf(1)) {
-    fun nextIndex():ListItemIndex {
-        val newLast = indeces.last()+1
-        val newIndeces = indeces.subList(0, indeces.size-1) + newLast
-        return ListItemIndex(newIndeces)
+
+interface ListIndexIterator {
+    fun nextIndex(): String
+
+    fun sublistPrefix(): String
+}
+
+fun interface ListIndexIteratorFactory {
+    fun createListIndexIterator(listLevel: Int, parentPrefix: String): ListIndexIterator
+}
+
+
+open class ArabicNumberIndexIterator(
+    val listLevel: Int,
+    val parentPrefix: String = ""
+) : ListIndexIterator {
+
+    private var index = 0
+
+    override fun nextIndex(): String =
+        indexString(++index)
+
+    private fun indexString(value: Int) =
+        listOf(parentPrefix, value.toString(), ". ")
+            .joinToString("")
+
+
+    override fun sublistPrefix(): String =
+        indexString(index)
+
+}
+
+open class RepeatingSymbolIndexIterator(
+    val listLevel: Int,
+    val parentPrefix: String = "",
+    val symbolPool: List<String> = listOf("\u2022 ", "- ")
+) : ListIndexIterator {
+
+    override fun nextIndex(): String =
+        symbolPool[listLevel % symbolPool.size]
+
+    override fun sublistPrefix(): String = ""
+
+}
+
+open class RomanAlphabetIndexIterator(
+    val listLevel: Int,
+    val parentPrefix: String = "",
+    val lowercase: Boolean = true
+) : ListIndexIterator {
+
+    private var index = 0
+
+    override fun nextIndex(): String = (index++).let { next ->
+        RomanAlphabetFactory.getString(next+1, isLowercase(next)) + " "
     }
 
-    fun subIndex() = ListItemIndex(indeces + 1)
-}
+    open fun isLowercase(index:Int) = lowercase
 
-interface ListItemSymbolFactory {
-    fun createSymbolFor(itemIndex: ListItemIndex): String
-}
-
-class ArabicNumberSymbolFactory : ListItemSymbolFactory {
-    override fun createSymbolFor(itemIndex: ListItemIndex): String =
-        itemIndex.indeces.map { it.toString() }.joinToString(".", postfix = ". ")
+    override fun sublistPrefix(): String = ""
 
 }
 
-class RepeatingSymbolFactory(val symbolPool: List<String> = listOf("\u2022 ", "- ")) : ListItemSymbolFactory {
-    override fun createSymbolFor(itemIndex: ListItemIndex): String =
-        symbolPool[(itemIndex.indeces.size-1) % symbolPool.size]
-
-}
