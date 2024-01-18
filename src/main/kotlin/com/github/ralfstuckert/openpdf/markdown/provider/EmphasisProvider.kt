@@ -16,8 +16,9 @@ class EmphasisProvider : AbstractElementProvider() {
 
     override fun setupDefaultRenderContexts(registry: ElementProviderRenderContextRegistry) {
         registry.registerRenderContextFunction(EMPHASIS_RENDER_CONTEXT_KEY) {
+            val parentContext = this
             derive {
-                this[FONT_STYLE] = this@registerRenderContextFunction.fontStyle.or(Font.ITALIC)
+                this[FONT_STYLE] = parentContext.fontStyle.or(Font.ITALIC)
             }
         }
     }

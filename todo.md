@@ -1,5 +1,4 @@
-* lists
-* foot notes
 * blockquote
+* foot notes
 * wiki
 * DSL document

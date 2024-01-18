@@ -16,8 +16,9 @@ class StrongProvider : AbstractElementProvider() {
 
     override fun setupDefaultRenderContexts(registry: ElementProviderRenderContextRegistry) {
         registry.registerRenderContextFunction(STRONG_RENDER_CONTEXT_KEY) {
+            val parentContext = this
             derive {
-                this[FONT_STYLE] = this@registerRenderContextFunction.fontStyle.or(Font.BOLD)
+                this[FONT_STYLE] = parentContext.fontStyle.or(Font.BOLD)
             }
         }
     }

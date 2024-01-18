@@ -18,8 +18,9 @@ class LinkProvider : AbstractElementProvider() {
 
     override fun setupDefaultRenderContexts(registry: ElementProviderRenderContextRegistry) {
         registry.registerRenderContextFunction(INLINE_LINK_RENDER_CONTEXT_KEY) {
+            val parentContext = this
             derive {
-                this[LINE_THICKNESS] = this@registerRenderContextFunction.fontSize *  0.07f
+                this[LINE_THICKNESS] = parentContext.fontSize *  0.07f
                 this[COLOR] = registry.defaultRenderContext.color
             }
         }
