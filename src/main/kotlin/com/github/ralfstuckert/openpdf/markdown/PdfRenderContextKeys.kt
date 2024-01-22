@@ -21,6 +21,7 @@ object PdfRenderContextKeys {
 
     val WEIGHTED_WIDTHS_ENABLED = PdfRenderContextKey<Boolean>("WEIGHTED_WIDTHS")
     val COLSPAN_ENABLED = PdfRenderContextKey<Boolean>("COLSPAN_ENABLED")
+    val PAGE_BREAK_ON_HORIZONTAL_RULE_ENABLED = PdfRenderContextKey<Boolean>("PAGE_BREAK_ON_HORIZONTAL_RULE_ENABLED")
     val LIST_INDEX_ITERATOR_FACTORY = PdfRenderContextKey<ListIndexIteratorFactory>("LIST_INDEX_ITERATOR_FACTORY")
 
 }

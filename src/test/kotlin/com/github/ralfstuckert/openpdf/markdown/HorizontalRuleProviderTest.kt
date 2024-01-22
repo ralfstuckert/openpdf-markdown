@@ -54,6 +54,21 @@ class HorizontalRuleProviderTest {
                     |
                 """.trimMargin()
             }
+
+            paragraph {
+                elementProviderRegistry = ElementProviderRegistry(defaultRenderContext).apply {
+                    registerRenderContextFunction(HORIZONTAL_RULE_RENDER_CONTEXT_KEY, true) {
+                        derive {
+                            this[PdfRenderContextKeys.PAGE_BREAK_ON_HORIZONTAL_RULE_ENABLED] = true
+                        }
+                    }
+                }
+                +"you can configure horizontal ruler as a page break"
+                +"""---
+                    | Here comes a new page...
+                    |
+                """.trimMargin()
+            }
         }
 //        File("horizontalRuler.pdf").writeBytes(doc)
         doc shouldEqual "horizontalRuler.pdf"
