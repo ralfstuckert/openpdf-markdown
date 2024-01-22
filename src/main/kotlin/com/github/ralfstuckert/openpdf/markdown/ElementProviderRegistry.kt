@@ -37,7 +37,8 @@ class ElementProviderRegistry(override val defaultRenderContext:PdfRenderContext
             TableProvider(),
             HtmlTagProvider(),
             HorizontalRuleProvider(),
-            ListProvider()
+            ListProvider(),
+            BlockquoteProvider()
         )
             .flatMap { provider ->
                 provider.setupDefaultRenderContexts(this)

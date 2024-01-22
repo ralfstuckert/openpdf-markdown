@@ -38,12 +38,13 @@ class TableProvider : AbstractElementProvider() {
     override fun processNode(visitor: OpenPdfVisitor, providerContext: ElementProviderContext, node: ASTNode) {
         checkNodeType(node)
 
+        val parentRenderContext = providerContext.renderContext
         val tableRenderContext = providerContext.deriveRenderContext(TABLE_RENDER_CONTEXT_KEY)
         val weightedWidthsEnabled = tableRenderContext[PdfRenderContextKeys.WEIGHTED_WIDTHS_ENABLED] ?: false
         val colspanEnabled = tableRenderContext[PdfRenderContextKeys.COLSPAN_ENABLED] ?: false
         val alignment = tableRenderContext[PdfRenderContextKeys.HORIZONTAL_ALIGNMENT] ?: HorizontalAlignment.center
 
-        val headers = processHeaderNode(visitor, tableRenderContext, getHeader(node), colspanEnabled)
+        val headers = processHeaderNode(visitor, parentRenderContext, getHeader(node), colspanEnabled)
         val rowDescriptor = processRowDescriptor(providerContext.markdownText, getRowDescriptor(node), weightedWidthsEnabled)
         val borderDescriptor = tableRenderContext.getBorderDescriptor()
 
@@ -59,7 +60,7 @@ class TableProvider : AbstractElementProvider() {
         }
 
         val rows = node.children.map {
-            if (it.type == GFMElementTypes.ROW) processRowNode(visitor, tableRenderContext, it, colspanEnabled) else null
+            if (it.type == GFMElementTypes.ROW) processRowNode(visitor, parentRenderContext, it, colspanEnabled) else null
         }.filterNotNull()
 
         rows.forEach { row ->

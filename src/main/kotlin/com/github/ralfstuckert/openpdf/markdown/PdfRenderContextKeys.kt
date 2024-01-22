@@ -17,6 +17,8 @@ object PdfRenderContextKeys {
     val WIDTH_PERCENTAGE = PdfRenderContextKey<Float>("WIDTH_PERCENTAGE")
     val HORIZONTAL_ALIGNMENT = PdfRenderContextKey<HorizontalAlignment>("HORIZONTAL_ALIGNMENT")
 
+    val PADDING_LEFT = PdfRenderContextKey<Float>("PADDING_LEFT")
+
     val WEIGHTED_WIDTHS_ENABLED = PdfRenderContextKey<Boolean>("WEIGHTED_WIDTHS")
     val COLSPAN_ENABLED = PdfRenderContextKey<Boolean>("COLSPAN_ENABLED")
     val LIST_INDEX_ITERATOR_FACTORY = PdfRenderContextKey<ListIndexIteratorFactory>("LIST_INDEX_ITERATOR_FACTORY")

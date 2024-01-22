@@ -1,4 +1,5 @@
 * blockquote
-* foot notes
-* wiki
+* CI build
+* release pdftools
 * DSL document
+* wiki
