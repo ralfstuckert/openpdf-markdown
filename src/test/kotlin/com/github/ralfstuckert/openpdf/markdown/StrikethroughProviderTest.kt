@@ -21,7 +21,7 @@ class StrikethroughProviderTest {
 
             paragraph {
                 +"""# heading with ~~strikethrough markup~~
-                    """
+                   |""".trimMargin()
             }
 
             paragraph {
@@ -34,8 +34,22 @@ class StrikethroughProviderTest {
                         }
                     }
                 }
-                +"let's change the rendering of strikethrough ~~to gray font with a smaller font~~ or whatever you want"
+                +"""let's change the rendering of strikethrough ~~to gray font with a smaller font~~ or whatever you want
+                   |""".trimMargin()
             }
+
+            paragraph {
+                elementProviderRegistry = ElementProviderRegistry(defaultRenderContext).apply {
+                    registerRenderContextFunction(STRIKETHROUGH_RENDER_CONTEXT_KEY, false) {
+                        derive {
+                            this[PdfRenderContextKeys.BACKGROUND_COLOR] = Color.orange
+                        }
+                    }
+                }
+                +"""let`s (mis-)use strikethrough as a text marker ~~with orange color~~
+                   |""".trimMargin()
+            }
+
         }
 //        File("strikethrough.pdf").writeBytes(doc)
         doc shouldEqual "strikethrough.pdf"

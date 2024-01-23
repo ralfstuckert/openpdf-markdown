@@ -8,6 +8,7 @@ object PdfRenderContextKeys {
     val FONT_SIZE = PdfRenderContextKey<Float>("FONT_SIZE")
     val FONT_STYLE = PdfRenderContextKey<Int>("FONT_TYPE")
     val COLOR = PdfRenderContextKey<Color>("COLOR")
+    val BACKGROUND_COLOR = PdfRenderContextKey<Color>("BACKGROUND_COLOR")
 
     val LINE_THICKNESS = PdfRenderContextKey<Float>("LINE_THICKNESS")
 
