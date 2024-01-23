@@ -47,7 +47,7 @@ class BlockquoteProviderTest {
                         }
                     }
                 }
-                +"let's change the rendering of a block code"
+                +"let's change the rendering of a blockquote"
                 +"""
                     |>here come a blockquote
                     |>another line
