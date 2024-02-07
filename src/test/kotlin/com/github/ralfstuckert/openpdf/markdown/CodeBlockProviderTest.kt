@@ -1,18 +1,18 @@
 package com.github.ralfstuckert.openpdf.markdown
 
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.*
+import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.document.document
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.CodeBlockProvider
 import com.lowagie.text.Font
 import org.junit.jupiter.api.Test
 import java.awt.Color
-import java.io.File
 
 class CodeBlockProviderTest {
 
     @Test
     fun codeblock() {
         val doc = document {
-            paragraph {
+            markup {
                 +"This is some text **"
                 +"""```
                    |this ist a 
@@ -23,7 +23,7 @@ class CodeBlockProviderTest {
             }
 
 
-            paragraph {
+            markup {
                 elementProviderRegistry = ElementProviderRegistry(defaultRenderContext).apply {
                     registerRenderContextFunction(CodeBlockProvider.CODE_BlOCK_RENDER_CONTEXT_KEY, true) {
                         val parentRenderContext = this

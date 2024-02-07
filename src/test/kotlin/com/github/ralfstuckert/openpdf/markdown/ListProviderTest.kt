@@ -4,21 +4,18 @@ import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.ElementP
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.defaultRenderContext
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.derive
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.ArabicNumberIndexIterator
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.LinkProvider.Companion.INLINE_LINK_RENDER_CONTEXT_KEY
+import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.document.document
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.ListIndexIteratorFactory
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.ListProvider
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.RomanAlphabetIndexIterator
 import org.junit.jupiter.api.Test
-import java.awt.Color
-import java.io.File
 
 class ListProviderTest {
 
     @Test
     fun list() {
         val doc = document {
-            paragraph {
+            markup {
                 +"""An ordered list
                     |1. first
                     |1. second
@@ -28,7 +25,7 @@ class ListProviderTest {
                 """.trimMargin()
             }
 
-            paragraph {
+            markup {
                 +"""An unordered list
                     |- first
                     |- second
@@ -38,7 +35,7 @@ class ListProviderTest {
                 """.trimMargin()
             }
 
-            paragraph {
+            markup {
                 +"""An mixed list
                     |- first
                     |- second
@@ -49,7 +46,7 @@ class ListProviderTest {
             }
 
 
-            paragraph {
+            markup {
                 +"""A list with markup
                     |- **first**
                     |- _second_
@@ -60,7 +57,7 @@ class ListProviderTest {
             }
 
 
-            paragraph {
+            markup {
                 elementProviderRegistry = ElementProviderRegistry(defaultRenderContext).apply {
                     registerRenderContextFunction(ListProvider.ORDERED_LIST_RENDER_CONTEXT_KEY) {
                         derive {

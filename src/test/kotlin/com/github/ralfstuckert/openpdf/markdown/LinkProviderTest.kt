@@ -4,34 +4,34 @@ import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.ElementP
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.defaultRenderContext
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.derive
+import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.document.document
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.LinkProvider.Companion.INLINE_LINK_RENDER_CONTEXT_KEY
 import org.junit.jupiter.api.Test
 import java.awt.Color
-import java.io.File
 
 class LinkProviderTest {
 
     @Test
     fun link() {
         val doc = document {
-            paragraph {
+            markup {
                 +"""There is [a link](https://github.com/ralfstuckert/openpdf-markdown) in the text
                 """
             }
 
-            paragraph {
+            markup {
                 +"""# heading with [a link](https://github.com/ralfstuckert/openpdf-markdown)
                     """
             }
 
-            paragraph {
+            markup {
                 +"""You can [use **markup** in links <img url="https://avatars.githubusercontent.com/u/23091459?s=200&v=4" height="50" />](https://github.com/ralfstuckert/openpdf-markdown)
                     """
             }
 
 
 
-            paragraph {
+            markup {
                 elementProviderRegistry = ElementProviderRegistry(defaultRenderContext).apply {
                     registerRenderContextFunction(INLINE_LINK_RENDER_CONTEXT_KEY, true) {
                         derive {

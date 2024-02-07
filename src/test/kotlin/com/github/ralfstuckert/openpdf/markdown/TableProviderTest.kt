@@ -4,6 +4,7 @@ import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.ElementP
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.defaultRenderContext
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.derive
+import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.document.document
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.TableProvider.Companion.TABLE_RENDER_CONTEXT_KEY
 import org.junit.jupiter.api.Test
 import java.awt.Color
@@ -13,7 +14,7 @@ class TableProviderTest {
     @Test
     fun header() {
         val doc = document {
-            paragraph {
+            markup {
                 +"A simple table"
                 +"""
                     | **Column 1** | **Column 2** | **Column 3** |
@@ -24,7 +25,7 @@ class TableProviderTest {
                 """.trimIndent()
             }
 
-            paragraph {
+            markup {
                 elementProviderRegistry = ElementProviderRegistry(defaultRenderContext).apply {
                     registerRenderContextFunction(TABLE_RENDER_CONTEXT_KEY, true) {
                         derive {
@@ -43,7 +44,7 @@ class TableProviderTest {
                """.trimIndent()
             }
 
-            paragraph {
+            markup {
                 elementProviderRegistry = ElementProviderRegistry(defaultRenderContext).apply {
                     registerRenderContextFunction(TABLE_RENDER_CONTEXT_KEY, true) {
                         derive {
@@ -62,7 +63,7 @@ class TableProviderTest {
                """.trimIndent()
             }
 
-            paragraph {
+            markup {
                 elementProviderRegistry = ElementProviderRegistry(defaultRenderContext).apply {
                     registerRenderContextFunction(TABLE_RENDER_CONTEXT_KEY, true) {
                         derive {
@@ -80,7 +81,7 @@ class TableProviderTest {
                """.trimIndent()
             }
 
-            paragraph {
+            markup {
                 elementProviderRegistry = ElementProviderRegistry(defaultRenderContext).apply {
                     registerRenderContextFunction(TABLE_RENDER_CONTEXT_KEY, true) {
                         derive {

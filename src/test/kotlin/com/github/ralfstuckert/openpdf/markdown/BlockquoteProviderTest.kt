@@ -1,19 +1,17 @@
 package com.github.ralfstuckert.openpdf.markdown
 
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.*
+import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.document.document
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.BlockquoteProvider.Companion.BlOCKQUOTE_RENDER_CONTEXT_KEY
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.CodeBlockProvider
 import com.lowagie.text.Font
 import org.junit.jupiter.api.Test
-import java.awt.Color
-import java.io.File
 
 class BlockquoteProviderTest {
 
     @Test
     fun blockquote() {
         val doc = document {
-            paragraph {
+            markup {
                 +"This is a simple blockquote"
                 +"""
                     |>here comes a blockquote
@@ -24,7 +22,7 @@ class BlockquoteProviderTest {
 
             }
 
-            paragraph {
+            markup {
                 +"This is a blockquote with markup"
                 +"""
                     |>here comes **a blockquote**
@@ -36,7 +34,7 @@ class BlockquoteProviderTest {
             }
 
 
-            paragraph {
+            markup {
                 elementProviderRegistry = ElementProviderRegistry(defaultRenderContext).apply {
                     registerRenderContextFunction(BlOCKQUOTE_RENDER_CONTEXT_KEY, true) {
                         val parentRenderContext = this

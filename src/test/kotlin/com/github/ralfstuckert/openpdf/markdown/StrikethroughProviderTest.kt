@@ -1,17 +1,17 @@
 package com.github.ralfstuckert.openpdf.markdown
 
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.*
+import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.document.document
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.StrikethroughProvider.Companion.STRIKETHROUGH_RENDER_CONTEXT_KEY
 import org.junit.jupiter.api.Test
 import java.awt.Color
-import java.io.File
 
 class StrikethroughProviderTest {
 
     @Test
     fun strikethrough() {
         val doc = document {
-            paragraph {
+            markup {
                 +" This is some text with ~~strikethrough markup~~\n"
                 +"""markup ~~over
                     | linebreaks~~ works.
@@ -19,12 +19,12 @@ class StrikethroughProviderTest {
                 """.trimMargin()
             }
 
-            paragraph {
+            markup {
                 +"""# heading with ~~strikethrough markup~~
                    |""".trimMargin()
             }
 
-            paragraph {
+            markup {
                 elementProviderRegistry = ElementProviderRegistry(defaultRenderContext).apply {
                     registerRenderContextFunction(STRIKETHROUGH_RENDER_CONTEXT_KEY, true) {
                         val parentRenderContext = this
@@ -38,7 +38,7 @@ class StrikethroughProviderTest {
                    |""".trimMargin()
             }
 
-            paragraph {
+            markup {
                 elementProviderRegistry = ElementProviderRegistry(defaultRenderContext).apply {
                     registerRenderContextFunction(STRIKETHROUGH_RENDER_CONTEXT_KEY, false) {
                         derive {

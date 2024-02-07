@@ -1,10 +1,7 @@
 package com.github.ralfstuckert
 
 import com.lowagie.text.*
-import com.lowagie.text.pdf.PdfPCell
-import com.lowagie.text.pdf.PdfPTable
 import com.lowagie.text.pdf.PdfWriter
-import java.awt.Color
 import java.io.FileOutputStream
 import java.io.IOException
 
@@ -28,28 +25,32 @@ fun main() {
         val img =
             Image.getInstance("https://user-images.githubusercontent.com/110724391/184472398-c590b47c-e1f2-41f8-87e6-2a1f68e8850d.png")
                 .apply {
-                    scaleAbsoluteHeight(200f)
+//                    scaleAbsoluteHeight(200f)
                 }
-        val table = PdfPTable(1)
-        table.widthPercentage = 100f
-        table.defaultCell.border = 0
-        val cell = PdfPCell(img).apply {
-            border = 0
-            horizontalAlignment = Element.ALIGN_CENTER
-        }
-//        cell.addElement(Chunk(img, 0f, 0f))
-        table.addCell(cell)
 
+//        val table = PdfPTable(1)
+//        table.widthPercentage = 100f
+//        table.defaultCell.border = 0
+//        val cell = PdfPCell(img).apply {
+//            border = 0
+//            horizontalAlignment = Element.ALIGN_CENTER
+//        }
+////        cell.addElement(Chunk(img, 0f, 0f))
+//        table.addCell(cell)
+//
         val p1 = Phrase("This is an image ")
         p1.add(" just here.\n")
-        p1.add(table)
+        p1.add(Chunk(img, 0f, 0f))
+        document.add(p1)
+        document.add(p1)
+        document.add(p1)
+//        document.add(Chunk("").apply { setNewPage() })
         document.add(p1)
         document.add(p1)
         document.add(p1)
         document.add(p1)
-        document.add(p1)
-        document.add(p1)
-        document.add(p1)
+
+        document.close()
     }
     catch (de:DocumentException)
     {
@@ -60,6 +61,5 @@ fun main() {
     }
 
     // step 5: we close the document
-    document.close()
 }
 

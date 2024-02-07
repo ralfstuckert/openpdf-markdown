@@ -4,6 +4,7 @@ import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.ElementP
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.defaultRenderContext
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.derive
+import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.document.document
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.HeaderProvider.Companion.HEADER_3_RENDER_CONTEXT_KEY
 import com.lowagie.text.Font
 import org.junit.jupiter.api.Test
@@ -14,7 +15,7 @@ class HeaderProviderTest {
     @Test
     fun header() {
         val doc = document {
-            paragraph {
+            markup {
                 +"""
                     # Header One
                     
@@ -32,7 +33,7 @@ class HeaderProviderTest {
                 """.trimIndent()
             }
 
-            paragraph {
+            markup {
                 elementProviderRegistry = ElementProviderRegistry(defaultRenderContext).apply {
                     registerRenderContextFunction(HEADER_3_RENDER_CONTEXT_KEY, true) {
                         derive {

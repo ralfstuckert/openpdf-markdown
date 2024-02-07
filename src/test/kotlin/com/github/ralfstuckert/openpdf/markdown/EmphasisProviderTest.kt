@@ -4,6 +4,7 @@ import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.ElementP
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.defaultRenderContext
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.derive
+import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.document.document
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.EmphasisProvider.Companion.EMPHASIS_RENDER_CONTEXT_KEY
 import com.lowagie.text.Font
 import org.junit.jupiter.api.Test
@@ -14,7 +15,7 @@ class EmphasisProviderTest {
     @Test
     fun emphasis() {
         val doc = document {
-            paragraph {
+            markup {
                 +" This is some text with _emphasis markup_\n"
                 +"""markup *over
                     | linebreaks* works.
@@ -22,12 +23,12 @@ class EmphasisProviderTest {
                 """.trimMargin()
             }
 
-            paragraph {
+            markup {
                 +"""# heading with _emphasis markup_
                     """
             }
 
-            paragraph {
+            markup {
                 elementProviderRegistry = ElementProviderRegistry(defaultRenderContext).apply {
                     registerRenderContextFunction(EMPHASIS_RENDER_CONTEXT_KEY, true) {
                         derive {

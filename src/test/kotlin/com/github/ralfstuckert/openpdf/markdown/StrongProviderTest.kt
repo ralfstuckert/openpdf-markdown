@@ -4,6 +4,7 @@ import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.ElementP
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.defaultRenderContext
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.derive
+import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.document.document
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.StrongProvider.Companion.STRONG_RENDER_CONTEXT_KEY
 import com.lowagie.text.Font
 import org.junit.jupiter.api.Test
@@ -14,7 +15,7 @@ class StrongProviderTest {
     @Test
     fun strong() {
         val doc = document {
-            paragraph {
+            markup {
                 +" This is some text with **strong markup**\n"
                 +"""markup __over
                     | linebreaks__ works.
@@ -22,12 +23,12 @@ class StrongProviderTest {
                 """.trimMargin()
             }
 
-            paragraph {
+            markup {
                 +"""# heading with **strong markup**
                     """
             }
 
-            paragraph {
+            markup {
                 elementProviderRegistry = ElementProviderRegistry(defaultRenderContext).apply {
                     registerRenderContextFunction(STRONG_RENDER_CONTEXT_KEY, true) {
                         derive {

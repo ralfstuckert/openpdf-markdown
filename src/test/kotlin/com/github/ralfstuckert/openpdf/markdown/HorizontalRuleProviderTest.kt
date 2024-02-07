@@ -1,17 +1,17 @@
 package com.github.ralfstuckert.openpdf.markdown
 
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.*
+import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.document.document
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.HorizontalRuleProvider.Companion.HORIZONTAL_RULE_RENDER_CONTEXT_KEY
 import org.junit.jupiter.api.Test
 import java.awt.Color
-import java.io.File
 
 class HorizontalRuleProviderTest {
 
     @Test
     fun horizontalRuler() {
         val doc = document {
-            paragraph {
+            markup {
                 +"A simple horizontal ruler"
                 +"""---
                     |
@@ -21,7 +21,7 @@ class HorizontalRuleProviderTest {
             }
 
 
-            paragraph {
+            markup {
                 elementProviderRegistry = ElementProviderRegistry(defaultRenderContext).apply {
                     registerRenderContextFunction(HORIZONTAL_RULE_RENDER_CONTEXT_KEY, true) {
                         val parentRenderContext = this
@@ -38,7 +38,7 @@ class HorizontalRuleProviderTest {
                 """.trimMargin()
             }
 
-            paragraph {
+            markup {
                 elementProviderRegistry = ElementProviderRegistry(defaultRenderContext).apply {
                     registerRenderContextFunction(HORIZONTAL_RULE_RENDER_CONTEXT_KEY, true) {
                         val parentRenderContext = this
@@ -55,7 +55,7 @@ class HorizontalRuleProviderTest {
                 """.trimMargin()
             }
 
-            paragraph {
+            markup {
                 elementProviderRegistry = ElementProviderRegistry(defaultRenderContext).apply {
                     registerRenderContextFunction(HORIZONTAL_RULE_RENDER_CONTEXT_KEY, true) {
                         derive {

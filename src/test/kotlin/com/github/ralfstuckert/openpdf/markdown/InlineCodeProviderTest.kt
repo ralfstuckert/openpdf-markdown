@@ -1,18 +1,18 @@
 package com.github.ralfstuckert.openpdf.markdown
 
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.*
+import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.document.document
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.InlineCodeProvider
 import com.lowagie.text.Font
 import org.junit.jupiter.api.Test
 import java.awt.Color
-import java.io.File
 
 class InlineCodeProviderTest {
 
     @Test
     fun inlineCode() {
         val doc = document {
-            paragraph {
+            markup {
                 +" This is some text with `inline **code** markup`\n"
                 +"""markup `of **code** over
                    |linebreaks` works.
@@ -21,12 +21,12 @@ class InlineCodeProviderTest {
 
             }
 
-            paragraph {
+            markup {
                 +"""# heading with `inline code markup`
                     """
             }
 
-            paragraph {
+            markup {
                 elementProviderRegistry = ElementProviderRegistry(defaultRenderContext).apply {
                     registerRenderContextFunction(InlineCodeProvider.INLINE_CODE_RENDER_CONTEXT_KEY, true) {
                         val parentRenderContext = this
