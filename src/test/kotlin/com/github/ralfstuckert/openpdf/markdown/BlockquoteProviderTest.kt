@@ -5,6 +5,7 @@ import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.document
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.BlockquoteProvider.Companion.BlOCKQUOTE_RENDER_CONTEXT_KEY
 import com.lowagie.text.Font
 import org.junit.jupiter.api.Test
+import java.io.File
 
 class BlockquoteProviderTest {
 
@@ -13,12 +14,15 @@ class BlockquoteProviderTest {
         val doc = document {
             markup {
                 +"This is a simple blockquote"
-                +"""
+                val blockquote = """
                     |>here comes a blockquote
                     |>another line  
                     |
                     |after blockquote
-                   |**""".trimMargin()
+                    |""".trimMargin()
+                + """```
+                    |${blockquote}```""".trimMargin()
+                + blockquote
 
             }
 
@@ -54,7 +58,7 @@ class BlockquoteProviderTest {
                    |**""".trimMargin()
             }
         }
-//        File("blockquote.pdf").writeBytes(doc)
+        File("blockquote.pdf").writeBytes(doc)
         doc shouldEqual "blockquote.pdf"
 
 

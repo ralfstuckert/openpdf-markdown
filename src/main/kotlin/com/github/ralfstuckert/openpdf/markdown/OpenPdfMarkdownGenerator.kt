@@ -1,7 +1,10 @@
 package com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown
 
 import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.TableProvider.Companion.TABLE_RENDER_CONTEXT_KEY
-import com.lowagie.text.*
+import com.lowagie.text.Document
+import com.lowagie.text.Element
+import com.lowagie.text.Font
+import com.lowagie.text.Paragraph
 import com.lowagie.text.pdf.PdfWriter
 import org.intellij.markdown.MarkdownElementTypes.ATX_3
 import org.intellij.markdown.MarkdownElementTypes.IMAGE
@@ -32,19 +35,44 @@ fun main() {
 
     val simpleText = "sdfjlsdf"
     val text = """
-### This is [a](http://wtf) Test
-  Would you do with a **drunken** _sailor_?
-And some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence and some very long sentence 
-
-<img url="https://user-images.githubusercontent.com/110724391/184472398-c590b47c-e1f2-41f8-87e6-2a1f68e8850d.png" width=$maxWidth />
-
-asdfsd [link test <img url="https://user-images.githubusercontent.com/110724391/184472398-c590b47c-e1f2-41f8-87e6-2a1f68e8850d.png" width=200 />](https://www.youtube.com/watch?v=3HIr0imLgxM)
-
-| **Syntax**      | Description | **Test Text**     |
-| :---        |    :----------:   |          ---: |
-| Header      | Title       | Here's this   |
-| Paragraph   | Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text | Text Text Text Text Text Text Text  <img url="https://user-images.githubusercontent.com/110724391/184472398-c590b47c-e1f2-41f8-87e6-2a1f68e8850d.png" width="20" /> |
-"""
+        |>this a blockquote
+        |>another line
+        |here I am
+        |
+        |> first line
+        |> >this a nested blockquote
+        |> >another line
+        |here I am
+        |
+        |1. first
+        |1. second
+        |    1. sec-one
+        |    1. sec-two
+        |    1. sec-one
+        |    1. sec-two
+        |    1. sec-one
+        |    1. sec-two
+        |    1. sec-one
+        |    1. sec-two
+        |    1. sec-one
+        |    1. sec-two
+        |    1. sec-one
+        |    1. sec-two
+        |    1. sec-one
+        |    1. sec-two
+        |    1. sec-one
+        |    1. sec-two
+        |    1. sec-one
+        |    1. sec-two
+        |    1. sec-one
+        |    1. sec-two
+        |    1. sec-one
+        |    1. sec-two
+        |        - sub one
+        |        - sub two
+        |- third
+        | 
+    """.trimMargin()
 
 
 
@@ -60,13 +88,13 @@ asdfsd [link test <img url="https://user-images.githubusercontent.com/110724391/
         }
         registerRenderContextFunction(ElementProviderRenderContextKey(INLINE_LINK.name), true) {
             derive {
-                this[PdfRenderContextKeys.FONT_COLOR] = Color.blue
+                this[PdfRenderContextKeys.COLOR] = Color.blue
 //                this[PdfRenderContextKeys.UNDERLINE_THICKNESS] = this@registerRenderContextFunction.fontSize * 0.08f
             }
         }
         registerRenderContextFunction(ElementProviderRenderContextKey(IMAGE.name), true) {
             derive {
-                this[PdfRenderContextKeys.UNDERLINE_THICKNESS] = 0f
+                this[PdfRenderContextKeys.LINE_THICKNESS] = 0f
             }
         }
         registerRenderContextFunction(TABLE_RENDER_CONTEXT_KEY, true) {
