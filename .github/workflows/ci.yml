@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
+    inputs:
+      debug:
+        type: boolean
+        default: "false"
 
 permissions:
   statuses: write
@@ -65,3 +69,9 @@ jobs:
           valColorRange: ${{ steps.coverage.outputs.coveragePercentage }}
           maxColorRange: 90
           minColorRange: 50
+          
+      - name: Debug
+        if: always() && inputs.debug == true
+        uses: mxschmitt/action-tmate@v3
+        with:
+          timeout-minutes: 15
