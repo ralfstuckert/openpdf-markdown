@@ -1,0 +1,67 @@
+name: Java CI with Gradle
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  statuses: write
+  checks: write
+  contents: write
+  pull-requests: write
+  actions: write
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: microsoft
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Execute Gradle build
+        run: ./gradlew test 
+        env:
+          GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish Unit Test Results
+        uses: phoenix-actions/test-reporting@v12
+        if: always()
+        with:
+          name: Junit Tests 
+          path: build/test-results/test/*.xml
+          reporter: java-junit
+          fail-on-error: true
+
+      - name: JaCoCo Code Coverage Report
+        id: coverage
+        uses: PavanMudigonda/jacoco-reporter@v5.0
+        with:
+          coverage_results_path: build/reports/jacoco/test/jacocoTestReport.xml
+          coverage_report_name: Coverage
+          coverage_report_title: JaCoCo
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Coverage Badge
+        uses: schneegans/dynamic-badges-action@v1.7.0
+        if: github.event_name != 'pull_request'
+        with:
+          gistID: b402d9e89cfacd00c180599aa8d01386
+          auth: ${{ secrets.CREATE_GIST_PAT }}
+          filename: badge.json
+          label: coverage
+          message: ${{ steps.coverage.outputs.coveragePercentageString }}
+          valColorRange: ${{ steps.coverage.outputs.coveragePercentage }}
+          maxColorRange: 90
+          minColorRange: 50
