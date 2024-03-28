@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "1.9.23"
+    jacoco
 }
 
 group = "com.github.ralfstuckert"
@@ -27,9 +28,30 @@ dependencies {
     testImplementation("com.github.ralfstuckert:pdftools:0.3.0")
 }
 
-tasks.test {
-    useJUnitPlatform()
-}
 kotlin {
     jvmToolchain(17)
 }
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+val jacocoExclude =
+    listOf("**/Main.kt")
+
+tasks.withType<JacocoReport> {
+    reports {
+        xml.required.set(true)
+        csv.required.set(false)
+        html.required.set(false)
+    }
+    classDirectories.setFrom(
+        classDirectories.files.map {
+            fileTree(it).matching {
+                exclude(jacocoExclude)
+            }
+        },
+    )
+}
+
