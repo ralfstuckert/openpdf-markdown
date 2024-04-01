@@ -4,7 +4,7 @@ registries:
     type: maven-repository
     url: https://maven.pkg.github.com/ralfstuckert
     username: user
-    password: ${{secrets.GITHUB_TOKEN}}
+    password: ${{secrets.PACKAGES_PAT}}
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
