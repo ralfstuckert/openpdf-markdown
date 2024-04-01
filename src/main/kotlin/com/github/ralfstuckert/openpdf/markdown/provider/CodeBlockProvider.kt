@@ -1,6 +1,6 @@
-package com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider
+package com.github.ralfstuckert.openpdf.markdown.provider
 
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.*
+import com.github.ralfstuckert.openpdf.markdown.*
 import com.lowagie.text.Chunk
 import com.lowagie.text.Font
 import com.lowagie.text.Paragraph

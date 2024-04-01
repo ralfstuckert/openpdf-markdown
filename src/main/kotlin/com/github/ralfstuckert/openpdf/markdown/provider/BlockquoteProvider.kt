@@ -1,6 +1,6 @@
-package com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider
+package com.github.ralfstuckert.openpdf.markdown.provider
 
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.*
+import com.github.ralfstuckert.openpdf.markdown.*
 import com.lowagie.text.*
 import com.lowagie.text.pdf.PdfPCell
 import com.lowagie.text.pdf.PdfPTable

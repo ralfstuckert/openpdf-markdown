@@ -1,9 +1,9 @@
-package com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider
+package com.github.ralfstuckert.openpdf.markdown.provider
 
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.*
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.COLOR
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.LINE_THICKNESS
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.LIST_INDEX_ITERATOR_FACTORY
+import com.github.ralfstuckert.openpdf.markdown.*
+import com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.COLOR
+import com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.LINE_THICKNESS
+import com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.LIST_INDEX_ITERATOR_FACTORY
 import com.lowagie.text.Anchor
 import com.lowagie.text.Chunk
 import com.lowagie.text.ListItem

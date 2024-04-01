@@ -1,6 +1,6 @@
-package com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown
+package com.github.ralfstuckert.openpdf.markdown
 
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.ListIndexIteratorFactory
+import com.github.ralfstuckert.openpdf.markdown.provider.ListIndexIteratorFactory
 import java.awt.Color
 
 object PdfRenderContextKeys {

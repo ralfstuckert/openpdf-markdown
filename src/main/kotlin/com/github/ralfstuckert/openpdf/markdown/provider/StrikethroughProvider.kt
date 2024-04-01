@@ -1,7 +1,7 @@
-package com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider
+package com.github.ralfstuckert.openpdf.markdown.provider
 
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.*
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.FONT_STYLE
+import com.github.ralfstuckert.openpdf.markdown.*
+import com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.FONT_STYLE
 import com.lowagie.text.Font
 import org.intellij.markdown.MarkdownElementTypes
 import org.intellij.markdown.ast.ASTNode

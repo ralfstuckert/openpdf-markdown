@@ -1,9 +1,9 @@
-package com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider
+package com.github.ralfstuckert.openpdf.markdown.provider
 
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.ElementProviderContext
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.ElementProviderRenderContextKey
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.ElementProviderRenderContextRegistry
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.OpenPdfVisitor
+import com.github.ralfstuckert.openpdf.markdown.ElementProviderContext
+import com.github.ralfstuckert.openpdf.markdown.ElementProviderRenderContextKey
+import com.github.ralfstuckert.openpdf.markdown.ElementProviderRenderContextRegistry
+import com.github.ralfstuckert.openpdf.markdown.OpenPdfVisitor
 import com.lowagie.text.Chunk
 import com.lowagie.text.Image
 import org.intellij.markdown.MarkdownElementTypes

@@ -1,8 +1,8 @@
 package com.github.ralfstuckert.openpdf.markdown
 
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.*
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.document.document
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.HorizontalRuleProvider.Companion.HORIZONTAL_RULE_RENDER_CONTEXT_KEY
+import com.github.ralfstuckert.openpdf.markdown.*
+import com.github.ralfstuckert.openpdf.markdown.document.document
+import com.github.ralfstuckert.openpdf.markdown.provider.HorizontalRuleProvider.Companion.HORIZONTAL_RULE_RENDER_CONTEXT_KEY
 import org.junit.jupiter.api.Test
 import java.awt.Color
 

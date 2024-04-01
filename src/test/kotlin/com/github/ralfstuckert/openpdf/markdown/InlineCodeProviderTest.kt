@@ -1,8 +1,8 @@
 package com.github.ralfstuckert.openpdf.markdown
 
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.*
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.document.document
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.InlineCodeProvider
+import com.github.ralfstuckert.openpdf.markdown.*
+import com.github.ralfstuckert.openpdf.markdown.document.document
+import com.github.ralfstuckert.openpdf.markdown.provider.InlineCodeProvider
 import com.lowagie.text.Font
 import org.junit.jupiter.api.Test
 import java.awt.Color

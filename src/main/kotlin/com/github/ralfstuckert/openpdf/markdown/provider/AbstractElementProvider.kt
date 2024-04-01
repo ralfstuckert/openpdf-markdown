@@ -1,6 +1,6 @@
-package com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider
+package com.github.ralfstuckert.openpdf.markdown.provider
 
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.ElementProvider
+import com.github.ralfstuckert.openpdf.markdown.ElementProvider
 import org.intellij.markdown.IElementType
 import org.intellij.markdown.MarkdownTokenTypes.Companion.EOL
 import org.intellij.markdown.MarkdownTokenTypes.Companion.WHITE_SPACE

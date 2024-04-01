@@ -1,8 +1,8 @@
-package com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider
+package com.github.ralfstuckert.openpdf.markdown.provider
 
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.ElementProviderContext
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.ElementProviderRenderContextRegistry
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.OpenPdfVisitor
+import com.github.ralfstuckert.openpdf.markdown.ElementProviderContext
+import com.github.ralfstuckert.openpdf.markdown.ElementProviderRenderContextRegistry
+import com.github.ralfstuckert.openpdf.markdown.OpenPdfVisitor
 import org.intellij.markdown.MarkdownElementTypes
 import org.intellij.markdown.MarkdownTokenTypes
 import org.intellij.markdown.ast.ASTNode

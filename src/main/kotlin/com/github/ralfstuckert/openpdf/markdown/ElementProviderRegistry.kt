@@ -1,6 +1,6 @@
-package com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown
+package com.github.ralfstuckert.openpdf.markdown
 
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.*
+import com.github.ralfstuckert.openpdf.markdown.provider.*
 import org.intellij.markdown.IElementType
 
 

@@ -1,8 +1,8 @@
-package com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.document
+package com.github.ralfstuckert.openpdf.markdown.document
 
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.ElementProviderRegistry
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.OpenPdfMarkdownGenerator
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.defaultRenderContext
+import com.github.ralfstuckert.openpdf.markdown.ElementProviderRegistry
+import com.github.ralfstuckert.openpdf.markdown.OpenPdfMarkdownGenerator
+import com.github.ralfstuckert.openpdf.markdown.defaultRenderContext
 import com.lowagie.text.*
 import com.lowagie.text.pdf.PdfPageEvent
 import com.lowagie.text.pdf.PdfWriter

@@ -1,4 +1,4 @@
-package com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown
+package com.github.ralfstuckert.openpdf.markdown
 
 import com.lowagie.text.Font
 import java.awt.Color

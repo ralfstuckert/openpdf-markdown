@@ -1,6 +1,6 @@
 package com.github.ralfstuckert.openpdf.markdown
 
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.document.document
+import com.github.ralfstuckert.openpdf.markdown.document.document
 import org.junit.jupiter.api.Test
 
 class ImageProviderTest {

@@ -1,11 +1,11 @@
 package com.github.ralfstuckert.openpdf.markdown
 
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.ElementProviderRegistry
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.defaultRenderContext
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.derive
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.document.document
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.EmphasisProvider.Companion.EMPHASIS_RENDER_CONTEXT_KEY
+import com.github.ralfstuckert.openpdf.markdown.ElementProviderRegistry
+import com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys
+import com.github.ralfstuckert.openpdf.markdown.defaultRenderContext
+import com.github.ralfstuckert.openpdf.markdown.derive
+import com.github.ralfstuckert.openpdf.markdown.document.document
+import com.github.ralfstuckert.openpdf.markdown.provider.EmphasisProvider.Companion.EMPHASIS_RENDER_CONTEXT_KEY
 import com.lowagie.text.Font
 import org.junit.jupiter.api.Test
 import java.awt.Color

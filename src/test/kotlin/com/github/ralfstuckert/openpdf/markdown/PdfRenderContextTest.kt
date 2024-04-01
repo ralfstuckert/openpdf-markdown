@@ -1,8 +1,8 @@
 package com.github.ralfstuckert.openpdf.markdown
 
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.FONT_FAMILY
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.FONT_SIZE
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.pdfRenderContext
+import com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.FONT_FAMILY
+import com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.FONT_SIZE
+import com.github.ralfstuckert.openpdf.markdown.pdfRenderContext
 import com.lowagie.text.Font
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test

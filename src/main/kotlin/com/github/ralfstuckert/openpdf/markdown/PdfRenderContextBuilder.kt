@@ -1,4 +1,4 @@
-package com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown
+package com.github.ralfstuckert.openpdf.markdown
 
 
 interface PdfRenderContextBuilderDsl {

@@ -1,6 +1,6 @@
 package com.github.ralfstuckert.openpdf.markdown
 
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.document.toInputStream
+import com.github.ralfstuckert.openpdf.markdown.document.toInputStream
 import rst.pdftools.compare.assertPdfEquals
 
 

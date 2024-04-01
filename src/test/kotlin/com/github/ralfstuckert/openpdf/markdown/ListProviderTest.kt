@@ -1,13 +1,13 @@
 package com.github.ralfstuckert.openpdf.markdown
 
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.ElementProviderRegistry
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.defaultRenderContext
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.derive
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.document.document
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.ListIndexIteratorFactory
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.ListProvider
-import com.github.ralfstuckert.com.github.ralfstuckert.openpdf.markdown.provider.RomanAlphabetIndexIterator
+import com.github.ralfstuckert.openpdf.markdown.ElementProviderRegistry
+import com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys
+import com.github.ralfstuckert.openpdf.markdown.defaultRenderContext
+import com.github.ralfstuckert.openpdf.markdown.derive
+import com.github.ralfstuckert.openpdf.markdown.document.document
+import com.github.ralfstuckert.openpdf.markdown.provider.ListIndexIteratorFactory
+import com.github.ralfstuckert.openpdf.markdown.provider.ListProvider
+import com.github.ralfstuckert.openpdf.markdown.provider.RomanAlphabetIndexIterator
 import org.junit.jupiter.api.Test
 
 class ListProviderTest {
