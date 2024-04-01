@@ -58,7 +58,7 @@ class BlockquoteProviderTest {
                    |**""".trimMargin()
             }
         }
-        File("blockquote.pdf").writeBytes(doc)
+//        File("blockquote.pdf").writeBytes(doc)
         doc shouldEqual "blockquote.pdf"
 
 
