@@ -1,10 +1,18 @@
 version: 2
+registries:
+  maven-ralfstuckert:
+    type: maven-repository
+    url: https://maven.pkg.github.com/ralfstuckert
+    username: user
+    password: ${{secrets.GITHUB_TOKEN}}
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
   - package-ecosystem: "gradle"
+    registries:
+      - maven-ralfstuckert
     directory: "/"
     schedule:
       interval: "weekly"
