@@ -101,7 +101,7 @@ class TableProviderTest {
             }
 
         }
-        File("table.pdf").writeBytes(doc)
+//        File("table.pdf").writeBytes(doc)
         doc shouldEqual "table.pdf"
 
 
