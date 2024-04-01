@@ -22,7 +22,7 @@ repositories {
 
 dependencies {
     implementation("org.jetbrains:markdown:0.5.0")
-    implementation("com.github.librepdf:openpdf:1.3.34")
+    implementation("com.github.librepdf:openpdf:2.0.1")
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("io.kotest:kotest-assertions-core-jvm:5.8.1")
     testImplementation("com.github.ralfstuckert:pdftools:0.3.0")
