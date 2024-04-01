@@ -154,10 +154,15 @@ class TableProvider : AbstractElementProvider() {
                     }
                 }
                 GFMTokenTypes.CELL -> {
-                    val nextCell = processCellNode(visitor, renderContext, child)
-                    val actualColspan = if (colspan > 0) colspan else 1
-                    val nextList = if (paragraph != null) list+TableCell(paragraph, actualColspan) else list
-                    Triple(nextList, nextCell, 0)
+                    if (child.isEmptyColspanCell(colspanEnabled)) {
+                        // fix for IDEA-315374 Table values are shifted in Markdown preview
+                        Triple(list, paragraph, colspan)
+                    } else {
+                        val nextCell = processCellNode(visitor, renderContext, child)
+                        val actualColspan = if (colspan > 0) colspan else 1
+                        val nextList = if (paragraph != null) list + TableCell(paragraph, actualColspan) else list
+                        Triple(nextList, nextCell, 0)
+                    }
                 }
                 else -> Triple(list, paragraph, colspan)
             }
@@ -182,6 +187,9 @@ class TableProvider : AbstractElementProvider() {
 
 
 }
+
+fun ASTNode.isEmptyColspanCell(colspanEnabled:Boolean) =
+    colspanEnabled && this.children.isEmpty()
 
 data class TableCell(val paragraph: Paragraph, val colspan:Int =1)
 
