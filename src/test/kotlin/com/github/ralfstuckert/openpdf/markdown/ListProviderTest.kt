@@ -9,6 +9,7 @@ import com.github.ralfstuckert.openpdf.markdown.provider.ListIndexIteratorFactor
 import com.github.ralfstuckert.openpdf.markdown.provider.ListProvider
 import com.github.ralfstuckert.openpdf.markdown.provider.RomanAlphabetIndexIterator
 import org.junit.jupiter.api.Test
+import java.io.File
 
 class ListProviderTest {
 
@@ -36,7 +37,7 @@ class ListProviderTest {
             }
 
             markup {
-                +"""An mixed list
+                +"""A mixed list
                     |- first
                     |- second
                     |    1. sub first
