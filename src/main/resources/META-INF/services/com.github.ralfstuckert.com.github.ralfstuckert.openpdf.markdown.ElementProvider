@@ -1,6 +1,0 @@
-com.github.ralfstuckert.openpdf.markdown.provider.TextProvider
-com.github.ralfstuckert.openpdf.markdown.provider.StrongProvider
-com.github.ralfstuckert.openpdf.markdown.provider.EOLProvider
-com.github.ralfstuckert.openpdf.markdown.provider.HeaderProvider
-com.github.ralfstuckert.openpdf.markdown.provider.LinkProvider
-com.github.ralfstuckert.openpdf.markdown.provider.ImageProvider

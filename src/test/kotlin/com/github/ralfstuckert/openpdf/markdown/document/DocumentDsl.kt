@@ -1,10 +1,9 @@
 package com.github.ralfstuckert.openpdf.markdown.document
 
-import com.github.ralfstuckert.openpdf.markdown.ElementProviderRegistry
+import com.github.ralfstuckert.openpdf.markdown.MarkdownRendererRegistry
 import com.github.ralfstuckert.openpdf.markdown.OpenPdfMarkdownGenerator
 import com.github.ralfstuckert.openpdf.markdown.defaultRenderContext
 import com.lowagie.text.*
-import com.lowagie.text.pdf.PdfPageEvent
 import com.lowagie.text.pdf.PdfWriter
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
@@ -34,13 +33,13 @@ class DocumentBuilder {
     var marginRight:Float = 20f
     var size = DocumentSize.A4_PORTRAIT
 
-    var elementProviderRegistry: ElementProviderRegistry = ElementProviderRegistry(defaultRenderContext)
+    var markdownRendererRegistry: MarkdownRendererRegistry = MarkdownRendererRegistry(defaultRenderContext)
 
-    fun markup(block: MarkupBuilder.()->Unit) {
-        val markupBuilder = MarkupBuilder(this.elementProviderRegistry)
-        markupBuilder.block()
+    fun markdown(block: MarkupBuilder.()->Unit) {
+        val markdownBuilder = MarkupBuilder(this.markdownRendererRegistry)
+        markdownBuilder.block()
         val paragraph = Paragraph().apply {
-            addAll(markupBuilder.build())
+            addAll(markdownBuilder.build())
         }
         paragraphs.add(paragraph)
     }
@@ -61,21 +60,21 @@ class DocumentBuilder {
 }
 
 @DocumentDsl
-class MarkupBuilder(var elementProviderRegistry: ElementProviderRegistry) {
+class MarkupBuilder(var markdownRendererRegistry: MarkdownRendererRegistry) {
 
     val LineBreak = "\n"
 
-    private val markupList = mutableListOf<String>()
+    private val markdownList = mutableListOf<String>()
 
     operator fun String.unaryPlus() =
-        markupList.add(this)
+        markdownList.add(this)
 
     operator fun Int.times(text:String) =
-        repeat(this) { markupList.add(text) }
+        repeat(this) { markdownList.add(text) }
 
 
     internal fun build():List<Element> =
-        markupList.map { OpenPdfMarkdownGenerator().generate(it, elementProviderRegistry) }
+        markdownList.map { OpenPdfMarkdownGenerator().generate(it, markdownRendererRegistry) }
 }
 
 

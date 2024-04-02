@@ -1,14 +1,10 @@
 package com.github.ralfstuckert.openpdf.markdown
 
-import com.github.ralfstuckert.openpdf.markdown.*
 import com.github.ralfstuckert.openpdf.markdown.document.document
-import com.github.ralfstuckert.openpdf.markdown.provider.BlockquoteProvider
-import com.github.ralfstuckert.openpdf.markdown.provider.StrikethroughProvider
-import com.github.ralfstuckert.openpdf.markdown.provider.TableProvider
-import com.lowagie.text.Font
+import com.github.ralfstuckert.openpdf.markdown.renderer.StrikethroughMarkdownRenderer
+import com.github.ralfstuckert.openpdf.markdown.renderer.TableMarkdownRenderer
 import org.junit.jupiter.api.Test
 import java.awt.Color
-import java.io.File
 
 class LetterTest {
 
@@ -16,14 +12,14 @@ class LetterTest {
     fun letter() {
         val doc = document {
 
-            elementProviderRegistry = ElementProviderRegistry(defaultRenderContext).apply {
-                registerRenderContextFunction(TableProvider.TABLE_RENDER_CONTEXT_KEY, true) {
+            markdownRendererRegistry = MarkdownRendererRegistry(defaultRenderContext).apply {
+                registerRenderContextFunction(TableMarkdownRenderer.TABLE_RENDER_CONTEXT_KEY, true) {
                     derive {
                         this[PdfRenderContextKeys.BORDER_WIDTH] = 0f
                         this[PdfRenderContextKeys.WEIGHTED_WIDTHS_ENABLED] = true
                     }
                 }
-                registerRenderContextFunction(StrikethroughProvider.STRIKETHROUGH_RENDER_CONTEXT_KEY, false) {
+                registerRenderContextFunction(StrikethroughMarkdownRenderer.STRIKETHROUGH_RENDER_CONTEXT_KEY, false) {
                     derive {
                         this[PdfRenderContextKeys.BACKGROUND_COLOR] = Color.orange
                     }
@@ -34,7 +30,7 @@ class LetterTest {
             marginRight = 40f
             marginTop = 60f
 
-            markup {
+            markdown {
                 +"""
                 |  |  |  |
                 |----|---|----|

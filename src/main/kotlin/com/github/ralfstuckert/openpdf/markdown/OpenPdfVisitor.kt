@@ -6,14 +6,14 @@ import org.intellij.markdown.MarkdownTokenTypes.Companion.EOL
 import org.intellij.markdown.MarkdownTokenTypes.Companion.WHITE_SPACE
 import org.intellij.markdown.ast.ASTNode
 
-class OpenPdfVisitor(val markdownText:String, val registry: ElementProviderRegistry) {
+class OpenPdfVisitor(val markdownText:String, val registry: MarkdownRendererRegistry) {
 
     fun visitNode(parentPdfElement: TextElementArray, pdfRenderContext: PdfRenderContext, node: ASTNode) {
-        val nodeProcessor = registry.getProviderFor(node.type)
+        val nodeProcessor = registry.getMarkdownRendererFor(node.type)
         if (nodeProcessor != null) {
             nodeProcessor.processNode(
                 this,
-                ElementProviderContext(markdownText, parentPdfElement, pdfRenderContext, registry),
+                MarkdownRendererContext(markdownText, parentPdfElement, pdfRenderContext, registry),
                 node)
         } else {
             visitChildren(parentPdfElement, pdfRenderContext, node, trim=true)
