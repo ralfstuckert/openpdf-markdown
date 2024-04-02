@@ -20,12 +20,12 @@ class HtmlTagProvider : AbstractElementProvider() {
         val tag = node.getTextInNode(providerContext.markdownText).toString().toTag()
         if (tag is Tag.StartTag && tag.name == "img") {
             val imageProcessor = visitor.registry.getProviderFor(MarkdownElementTypes.IMAGE)
-            val url = tag.attributes["url"]
+            val src = tag.attributes["src"]
             val width = tag.attributes["width"]?.toFloatOrNull()
             val height = tag.attributes["height"]?.toFloatOrNull()
 
-            if (url != null && imageProcessor is ImageProcessor) {
-                imageProcessor.processImage(visitor, providerContext, url, width, height)
+            if (src != null && imageProcessor is ImageProcessor) {
+                imageProcessor.processImage(visitor, providerContext, src, width, height)
             }
         }
     }

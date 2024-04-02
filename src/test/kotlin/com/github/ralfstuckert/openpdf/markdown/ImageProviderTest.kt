@@ -17,18 +17,18 @@ class ImageProviderTest {
 
             markup {
                 +"""if you want to scale it, use the HTML img-tag and set e.g. the width\
-                    |<img url="https://avatars.githubusercontent.com/u/23091459?s=200&v=4" width="300" />
+                    |<img src="https://avatars.githubusercontent.com/u/23091459?s=200&v=4" width="300" />
                     |""".trimMargin()
             }
 
             markup {
                 +"""or both width and height
-                   |<img url="https://avatars.githubusercontent.com/u/23091459?s=200&v=4" width="500" height="100" />
+                   |<img src="https://avatars.githubusercontent.com/u/23091459?s=200&v=4" width="500" height="100" />
                    |""".trimMargin()
             }
 
             markup {
-                +"""you can embed an image <img url="https://avatars.githubusercontent.com/u/23091459?s=200&v=4" width="20" /> in your text"""
+                +"""you can embed an image <img src="https://avatars.githubusercontent.com/u/23091459?s=200&v=4" width="20" /> in your text"""
             }
 
         }
