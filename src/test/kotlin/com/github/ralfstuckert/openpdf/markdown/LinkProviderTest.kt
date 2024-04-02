@@ -25,7 +25,7 @@ class LinkProviderTest {
             }
 
             markup {
-                +"""You can [use **markup** in links <img url="https://avatars.githubusercontent.com/u/23091459?s=200&v=4" height="50" />](https://github.com/ralfstuckert/openpdf-markdown)
+                +"""You can [use **markup** in links <img src="https://avatars.githubusercontent.com/u/23091459?s=200&v=4" height="50" />](https://github.com/ralfstuckert/openpdf-markdown)
                     """
             }
 
