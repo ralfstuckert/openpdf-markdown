@@ -35,8 +35,8 @@ class DocumentBuilder {
 
     var markdownRendererRegistry: MarkdownRendererRegistry = MarkdownRendererRegistry(defaultRenderContext)
 
-    fun markdown(block: MarkupBuilder.()->Unit) {
-        val markdownBuilder = MarkupBuilder(this.markdownRendererRegistry)
+    fun markdown(block: MarkdownBuilder.()->Unit) {
+        val markdownBuilder = MarkdownBuilder(this.markdownRendererRegistry)
         markdownBuilder.block()
         val paragraph = Paragraph().apply {
             addAll(markdownBuilder.build())
@@ -60,7 +60,7 @@ class DocumentBuilder {
 }
 
 @DocumentDsl
-class MarkupBuilder(var markdownRendererRegistry: MarkdownRendererRegistry) {
+class MarkdownBuilder(var markdownRendererRegistry: MarkdownRendererRegistry) {
 
     val LineBreak = "\n"
 

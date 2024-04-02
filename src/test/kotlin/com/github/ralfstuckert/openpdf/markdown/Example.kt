@@ -10,11 +10,12 @@ typealias Filename = String
 class Example {
 
     @Test
-    fun basicMarkup() {
-        writeMarkupPDF("This is some **strong text**", "example.pdf")
+    fun basicMarkdown() {
+        val markdown = ""
+        writeMarkdownPDF("This is some **strong text**", "example.pdf")
     }
 
-    fun writeMarkupPDF(markdown:String, filename:Filename) {
+    fun writeMarkdownPDF(markdown:String, filename:Filename) {
         val element = OpenPdfMarkdownGenerator().generate(markdown)
 
         with(FileOutputStream(filename)) {
