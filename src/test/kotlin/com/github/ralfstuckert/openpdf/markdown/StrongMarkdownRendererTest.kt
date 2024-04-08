@@ -38,7 +38,7 @@ class StrongMarkdownRendererTest {
                 +"let's change the rendering of strong **to blue times roman with size 17** or whatever you want"
             }
         }
-        File("strong.pdf").writeBytes(doc)
+//        File("strong.pdf").writeBytes(doc)
         doc shouldEqual "strong.pdf"
 
 
