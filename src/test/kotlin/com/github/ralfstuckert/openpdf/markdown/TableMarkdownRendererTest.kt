@@ -4,6 +4,7 @@ import com.github.ralfstuckert.openpdf.markdown.document.document
 import com.github.ralfstuckert.openpdf.markdown.renderer.TableMarkdownRenderer.Companion.TABLE_RENDER_CONTEXT_KEY
 import org.junit.jupiter.api.Test
 import java.awt.Color
+import java.io.File
 
 class TableMarkdownRendererTest {
 
@@ -17,6 +18,7 @@ class TableMarkdownRendererTest {
                     |----------|----------|----------|
                     | Hello there, what's going on | Beat's me | The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog |
                     | | hihi | |
+                                 
                                                             
                 """.trimIndent()
             }
@@ -37,6 +39,7 @@ class TableMarkdownRendererTest {
                     | Hello there, what's going on | Beat's me | The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog |
                     | | hihi | |
                     
+                    
                """.trimIndent()
             }
 
@@ -56,6 +59,7 @@ class TableMarkdownRendererTest {
                     | Hello there, what's going on | Beat's me | The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog |
                     | | hihi | |
                     
+                    
                """.trimIndent()
             }
 
@@ -74,6 +78,7 @@ class TableMarkdownRendererTest {
                     | Hello there, what's going on | Beat's me | The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog |
                     | | hihi | |
                     
+                    
                """.trimIndent()
             }
 
@@ -91,12 +96,13 @@ class TableMarkdownRendererTest {
                     |----------|----------|----------|----------|----------|
                     | one | two | three | four | five |
                     | Hello there, what's going on | The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog ||| yeehaw |             
+                            
                                         
                 """.trimIndent()
             }
 
         }
-//        File("table.pdf").writeBytes(doc)
+ //       File("table.pdf").writeBytes(doc)
         doc shouldEqual "table.pdf"
 
 
