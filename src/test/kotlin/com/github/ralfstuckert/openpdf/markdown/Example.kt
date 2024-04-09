@@ -37,6 +37,8 @@ Advancus curum adep.
     }
 
     fun writeMarkdownPDF(markdown:String, filename:Filename) {
+
+        // provide custom MarkdownRendererRegistry in order to enable special table features
         val markdownRendererRegistry = MarkdownRendererRegistry(defaultRenderContext).apply {
             registerRenderContextFunction(TABLE_RENDER_CONTEXT_KEY, true) {
                 derive {
