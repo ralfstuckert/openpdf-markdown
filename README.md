@@ -24,7 +24,7 @@ Advancus curum adep.
 
 ...results in the following [PDF](https://github.com/ralfstuckert/openpdf-markdown/blob/main/src/test/resources/com/github/ralfstuckert/openpdf/markdown/example.pdf).
 
-<img alt="example" src="https://raw.githubusercontent.com/wiki/ralfstuckert/openpdf-markdown/images/example.png" width="800px" />
+<kbd><img alt="example" src="https://raw.githubusercontent.com/wiki/ralfstuckert/openpdf-markdown/images/example.png" width="800px" /></kbd>
 
 The [code](https://github.com/ralfstuckert/openpdf-markdown/blob/main/src/test/kotlin/com/github/ralfstuckert/openpdf/markdown/Example.kt) to create that is quite simple:
 
