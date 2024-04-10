@@ -47,3 +47,15 @@ You will find the code in [Example](https://github.com/ralfstuckert/openpdf-mark
 Just head over to the [Getting Started](https://github.com/ralfstuckert/openpdf-markdown/wiki/Getting-Started) page for examples,
 and information on to customize the default rendering of the markdown or even
 replace the renderer code at all.
+
+```xml
+<dependency>
+  <groupId>com.github.ralfstuckert</groupId>
+  <artifactId>openpdf-markdown</artifactId>
+  <version>0.1.0</version>
+</dependency>
+```
+
+```gradle
+implementation("com.github.ralfstuckert:openpdf-markdown:0.1.0")
+```
