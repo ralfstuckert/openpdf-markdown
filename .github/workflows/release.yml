@@ -4,12 +4,7 @@ on:
   release:
     types: [created]
 
-permissions:
-  statuses: write
-  checks: write
-  contents: write
-  pull-requests: write
-  actions: write
+permissions: all
   
 jobs:
   build:
