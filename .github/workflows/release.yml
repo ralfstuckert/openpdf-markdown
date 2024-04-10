@@ -4,7 +4,9 @@ on:
   release:
     types: [created]
 
-permissions: all
+permissions: 
+  contents: read
+  packages: write
   
 jobs:
   build:
