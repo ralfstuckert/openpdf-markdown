@@ -22,6 +22,12 @@ Lorem ipsum dolor sit amet, **consetetur sadipscing** elitr, sed diam _nonumy ei
 Advancus curum adep.
 ```
 
+...results in the following [PDF](https://github.com/ralfstuckert/openpdf-markdown/blob/main/src/test/resources/com/github/ralfstuckert/openpdf/markdown/example.pdf).
+You will find the code in [Example](https://github.com/ralfstuckert/openpdf-markdown/blob/main/src/test/kotlin/com/github/ralfstuckert/openpdf/markdown/Example.kt).
+
+<img alt="example" src="https://raw.githubusercontent.com/wiki/ralfstuckert/openpdf-markdown/images/example.png" width="800px" />
+
+The code to create that is straight forward:
 ```kotlin
 val markdown = """
 # Tempor Invidunt
@@ -38,11 +44,6 @@ with(FileOutputStream(filename)) {
     document.close()
 }
 ```
-
-...results in the following [PDF](https://github.com/ralfstuckert/openpdf-markdown/blob/main/src/test/resources/com/github/ralfstuckert/openpdf/markdown/example.pdf).
-You will find the code in [Example](https://github.com/ralfstuckert/openpdf-markdown/blob/main/src/test/kotlin/com/github/ralfstuckert/openpdf/markdown/Example.kt).
-
-<img alt="example" src="https://raw.githubusercontent.com/wiki/ralfstuckert/openpdf-markdown/images/example.png" width="800px" />
 
 Just head over to the [Getting Started](https://github.com/ralfstuckert/openpdf-markdown/wiki/Getting-Started) page for examples,
 and information on to customize the default rendering of the markdown or even
