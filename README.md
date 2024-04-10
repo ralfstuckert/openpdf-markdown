@@ -21,6 +21,24 @@ Lorem ipsum dolor sit amet, **consetetur sadipscing** elitr, sed diam _nonumy ei
 
 Advancus curum adep.
 ```
+
+```kotlin
+val markdown = """
+# Tempor Invidunt
+...
+""".trimIndent()
+
+val element = OpenPdfMarkdownGenerator().generate(markdown)
+
+with(FileOutputStream(filename)) {
+    val document: Document = Document()
+    PdfWriter.getInstance(document, this)
+    document.open()
+    document.add(element)
+    document.close()
+}
+```
+
 ...results in the following [PDF](https://github.com/ralfstuckert/openpdf-markdown/blob/main/src/test/resources/com/github/ralfstuckert/openpdf/markdown/example.pdf).
 You will find the code in [Example](https://github.com/ralfstuckert/openpdf-markdown/blob/main/src/test/kotlin/com/github/ralfstuckert/openpdf/markdown/Example.kt).
 
