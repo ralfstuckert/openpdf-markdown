@@ -1,10 +1,13 @@
+import java.net.URI
+
 plugins {
     kotlin("jvm") version "1.9.23"
+    `maven-publish`
     jacoco
 }
 
 group = "com.github.ralfstuckert"
-version = "1.0-SNAPSHOT"
+version = "0.1.0"
 
 repositories {
     maven {
@@ -55,3 +58,24 @@ tasks.withType<JacocoReport> {
     )
 }
 
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = group as String
+            artifactId = rootProject.name
+            version = version
+
+            from(components["java"])
+        }
+    }
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = URI("https://maven.pkg.github.com/ralfstuckert/openpdf-markdown")
+            credentials {
+                username = System.getenv("USERNAME")
+                password = System.getenv("TOKEN")
+            }
+        }
+    }
+}
