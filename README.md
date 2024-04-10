@@ -23,11 +23,11 @@ Advancus curum adep.
 ```
 
 ...results in the following [PDF](https://github.com/ralfstuckert/openpdf-markdown/blob/main/src/test/resources/com/github/ralfstuckert/openpdf/markdown/example.pdf).
-You will find the code in [Example](https://github.com/ralfstuckert/openpdf-markdown/blob/main/src/test/kotlin/com/github/ralfstuckert/openpdf/markdown/Example.kt).
 
 <img alt="example" src="https://raw.githubusercontent.com/wiki/ralfstuckert/openpdf-markdown/images/example.png" width="800px" />
 
-The code to create that is straight forward:
+The [code](https://github.com/ralfstuckert/openpdf-markdown/blob/main/src/test/kotlin/com/github/ralfstuckert/openpdf/markdown/Example.kt) to create that is quite simple:
+
 ```kotlin
 val markdown = """
 # Tempor Invidunt
