@@ -1,5 +1,5 @@
 # OpenPDF Markdown
-This project lets you use simple markdown to created styled text with [OpenPDF](https://github.com/LibrePDF/OpenPDF).
+This project lets you use simple markdown to create styled text with [OpenPDF](https://github.com/LibrePDF/OpenPDF).
 Given the following markup:
 
 ```
