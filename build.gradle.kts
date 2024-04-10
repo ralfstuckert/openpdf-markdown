@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.github.ralfstuckert"
-version = "0.1.0"
+version = "0.1.1-SNAPSHOT"
 
 repositories {
     maven {
