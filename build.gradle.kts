@@ -28,7 +28,7 @@ dependencies {
     implementation("com.github.librepdf:openpdf:2.0.3")
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("io.kotest:kotest-assertions-core-jvm:5.9.1")
-    testImplementation("com.github.ralfstuckert:pdftools:0.3.0")
+    testImplementation("com.github.ralfstuckert:pdftools:0.4.0")
 }
 
 kotlin {
