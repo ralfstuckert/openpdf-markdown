@@ -1,4 +1,4 @@
-package com.github.ralfstuckert
+package com.github.ralfstuckert.openpdf
 
 import org.intellij.markdown.ast.ASTNode
 import org.intellij.markdown.ast.LeafASTNode
