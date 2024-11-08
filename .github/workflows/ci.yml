@@ -51,7 +51,7 @@ jobs:
       - name: JaCoCo Code Coverage Report
 #        if: env.fixed == true
         id: coverage
-        uses: ralfstuckert/jacoco-reporter@main
+        uses: PavanMudigonda/jacoco-reporter@v5.0
         with:
           coverage_results_path: build/reports/jacoco/test/jacocoTestReport.xml
           coverage_report_name: Coverage
