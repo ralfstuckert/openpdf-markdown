@@ -49,7 +49,7 @@ jobs:
           fail-on-error: true
 
       - name: JaCoCo Code Coverage Report
-        if: env.fixed == true
+#        if: env.fixed == true
         id: coverage
         uses: PavanMudigonda/jacoco-reporter@v5.1
         with:
