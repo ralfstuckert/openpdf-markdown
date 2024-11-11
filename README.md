@@ -1,3 +1,6 @@
+[![Java CI with Gradle](https://github.com/ralfstuckert/openpdf-markdown/actions/workflows/ci.yml/badge.svg)](https://github.com/ralfstuckert/openpdf-markdown/actions/workflows/ci.yml)
+![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/ralfstuckert/b402d9e89cfacd00c180599aa8d01386/raw/badge.json)
+
 # OpenPDF Markdown
 This project lets you use simple markdown to create styled text with [OpenPDF](https://github.com/LibrePDF/OpenPDF).
 Given the following markup:
