@@ -25,14 +25,14 @@ repositories {
 
 dependencies {
     implementation("org.jetbrains:markdown:0.7.3")
-    implementation("com.github.librepdf:openpdf:2.0.3")
+    implementation("com.github.librepdf:openpdf:2.2.4")
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("io.kotest:kotest-assertions-core-jvm:5.9.1")
     testImplementation("com.github.ralfstuckert:pdftools:0.4.0")
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 tasks.withType<Test> {
