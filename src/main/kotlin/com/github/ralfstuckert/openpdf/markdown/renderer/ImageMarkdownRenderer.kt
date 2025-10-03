@@ -4,8 +4,8 @@ import com.github.ralfstuckert.openpdf.markdown.MarkdownRendererContext
 import com.github.ralfstuckert.openpdf.markdown.MarkdownRenderContextKey
 import com.github.ralfstuckert.openpdf.markdown.MarkdownRenderContextRegistry
 import com.github.ralfstuckert.openpdf.markdown.OpenPdfVisitor
-import com.lowagie.text.Chunk
-import com.lowagie.text.Image
+import org.openpdf.text.Chunk
+import org.openpdf.text.Image
 import org.intellij.markdown.MarkdownElementTypes
 import org.intellij.markdown.ast.ASTNode
 import org.intellij.markdown.ast.getTextInNode

@@ -6,8 +6,8 @@ import com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.HORIZONTAL_
 import com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.LINE_THICKNESS
 import com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.PAGE_BREAK_ON_HORIZONTAL_RULE_ENABLED
 import com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.WIDTH_PERCENTAGE
-import com.lowagie.text.Chunk
-import com.lowagie.text.pdf.draw.LineSeparator
+import org.openpdf.text.Chunk
+import org.openpdf.text.pdf.draw.LineSeparator
 import org.intellij.markdown.MarkdownTokenTypes.Companion.HORIZONTAL_RULE
 import org.intellij.markdown.ast.ASTNode
 

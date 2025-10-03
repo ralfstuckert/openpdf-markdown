@@ -1,10 +1,10 @@
 package com.github.ralfstuckert.openpdf.markdown
 
-import com.lowagie.text.TextElementArray
 import org.intellij.markdown.MarkdownElementTypes.BLOCK_QUOTE
 import org.intellij.markdown.MarkdownTokenTypes.Companion.EOL
 import org.intellij.markdown.MarkdownTokenTypes.Companion.WHITE_SPACE
 import org.intellij.markdown.ast.ASTNode
+import org.openpdf.text.TextElementArray
 
 class OpenPdfVisitor(val markdownText:String, val registry: MarkdownRendererRegistry) {
 

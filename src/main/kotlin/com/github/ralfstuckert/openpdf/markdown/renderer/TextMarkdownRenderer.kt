@@ -3,7 +3,7 @@ package com.github.ralfstuckert.openpdf.markdown.renderer
 import com.github.ralfstuckert.openpdf.markdown.*
 import com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.BACKGROUND_COLOR
 import com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.LINE_THICKNESS
-import com.lowagie.text.Chunk
+import org.openpdf.text.Chunk
 import org.intellij.markdown.MarkdownTokenTypes.Companion.TEXT
 import org.intellij.markdown.MarkdownTokenTypes.Companion.WHITE_SPACE
 import org.intellij.markdown.ast.ASTNode

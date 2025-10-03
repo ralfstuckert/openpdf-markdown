@@ -4,10 +4,10 @@ import com.github.ralfstuckert.openpdf.markdown.MarkdownRendererContext
 import com.github.ralfstuckert.openpdf.markdown.MarkdownRenderContextKey
 import com.github.ralfstuckert.openpdf.markdown.MarkdownRenderContextRegistry
 import com.github.ralfstuckert.openpdf.markdown.OpenPdfVisitor
-import com.lowagie.text.Chunk
-import com.lowagie.text.List
-import com.lowagie.text.Phrase
-import com.lowagie.text.pdf.PdfPTable
+import org.openpdf.text.Chunk
+import org.openpdf.text.List
+import org.openpdf.text.Phrase
+import org.openpdf.text.pdf.PdfPTable
 import org.intellij.markdown.MarkdownTokenTypes.Companion.EOL
 import org.intellij.markdown.ast.ASTNode
 import org.intellij.markdown.ast.getTextInNode

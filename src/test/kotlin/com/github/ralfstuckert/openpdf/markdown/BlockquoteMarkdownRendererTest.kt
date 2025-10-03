@@ -2,7 +2,7 @@ package com.github.ralfstuckert.openpdf.markdown
 
 import com.github.ralfstuckert.openpdf.markdown.document.document
 import com.github.ralfstuckert.openpdf.markdown.renderer.BlockquoteMarkdownRenderer.Companion.BlOCKQUOTE_RENDER_CONTEXT_KEY
-import com.lowagie.text.Font
+import org.openpdf.text.Font
 import org.junit.jupiter.api.Test
 import java.io.File
 

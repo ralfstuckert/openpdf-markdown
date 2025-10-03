@@ -2,8 +2,8 @@ package com.github.ralfstuckert.openpdf.markdown
 
 import com.github.ralfstuckert.openpdf.markdown.renderer.StrikethroughMarkdownRenderer.Companion.STRIKETHROUGH_RENDER_CONTEXT_KEY
 import com.github.ralfstuckert.openpdf.markdown.renderer.TableMarkdownRenderer.Companion.TABLE_RENDER_CONTEXT_KEY
-import com.lowagie.text.Document
-import com.lowagie.text.pdf.PdfWriter
+import org.openpdf.text.Document
+import org.openpdf.text.pdf.PdfWriter
 import org.junit.jupiter.api.Test
 import java.awt.Color
 import java.io.FileOutputStream

@@ -4,7 +4,7 @@ import com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.COLOR
 import com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.FONT_FAMILY
 import com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.FONT_SIZE
 import com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.FONT_STYLE
-import com.lowagie.text.Font
+import org.openpdf.text.Font
 
 
 data class PdfRenderContextKey<T : Any>(val name: String, val type: Class<T>)
@@ -13,9 +13,11 @@ inline fun <reified T : Any> PdfRenderContextKey(name: String) =
     PdfRenderContextKey(name, T::class.java)
 
 
+data class PdfRenderContext(internal val contextMap: Map<PdfRenderContextKey<*>, Any>) {
 @ConsistentCopyVisibility
 data class PdfRenderContext internal constructor(val contextMap: Map<PdfRenderContextKey<*>, Any>) {
 
+    @Suppress("NON_PUBLIC_CALL_FROM_PUBLIC_INLINE")
     inline operator fun <reified T : Any> get(key: PdfRenderContextKey<T>): T? =
         when (val value = contextMap[key]) {
             null -> null

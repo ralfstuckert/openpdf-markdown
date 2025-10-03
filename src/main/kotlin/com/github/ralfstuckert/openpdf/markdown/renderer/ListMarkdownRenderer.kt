@@ -2,9 +2,9 @@ package com.github.ralfstuckert.openpdf.markdown.renderer
 
 import com.github.ralfstuckert.openpdf.markdown.*
 import com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.LIST_INDEX_ITERATOR_FACTORY
-import com.lowagie.text.Chunk
-import com.lowagie.text.ListItem
-import com.lowagie.text.factories.RomanAlphabetFactory
+import org.openpdf.text.Chunk
+import org.openpdf.text.ListItem
+import org.openpdf.text.factories.RomanAlphabetFactory
 import org.intellij.markdown.MarkdownElementTypes.LIST_ITEM
 import org.intellij.markdown.MarkdownElementTypes.ORDERED_LIST
 import org.intellij.markdown.MarkdownElementTypes.PARAGRAPH
@@ -53,11 +53,11 @@ class ListMarkdownRenderer : AbstractMarkdownRenderer() {
         listLevel: Int = 0,
         listItemPrefix: String = "",
         indentation: Float = 0f,
-    ): com.lowagie.text.List {
+    ): org.openpdf.text.List {
         val renderContext = getRenderContext(rendererContext, node)
         val listIndexIterator = getListIndexIterator(renderContext, node, listLevel, listItemPrefix)
 
-        val list = com.lowagie.text.List(false, false).apply {
+        val list = org.openpdf.text.List(false, false).apply {
             indentationLeft = indentation
         }
 

@@ -2,7 +2,7 @@ package com.github.ralfstuckert.openpdf.markdown.renderer
 
 import com.github.ralfstuckert.openpdf.markdown.*
 import com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.FONT_STYLE
-import com.lowagie.text.Font
+import org.openpdf.text.Font
 import org.intellij.markdown.MarkdownElementTypes
 import org.intellij.markdown.ast.ASTNode
 

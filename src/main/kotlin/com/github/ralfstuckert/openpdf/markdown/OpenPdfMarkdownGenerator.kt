@@ -1,10 +1,10 @@
 package com.github.ralfstuckert.openpdf.markdown
 
-import com.lowagie.text.Element
-import com.lowagie.text.Paragraph
 import org.intellij.markdown.flavours.MarkdownFlavourDescriptor
 import org.intellij.markdown.flavours.gfm.GFMFlavourDescriptor
 import org.intellij.markdown.parser.MarkdownParser
+import org.openpdf.text.Element
+import org.openpdf.text.Paragraph
 
 
 class OpenPdfMarkdownGenerator {

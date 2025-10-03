@@ -1,9 +1,9 @@
 package com.github.ralfstuckert.openpdf.markdown.renderer
 
 import com.github.ralfstuckert.openpdf.markdown.*
-import com.lowagie.text.*
-import com.lowagie.text.pdf.PdfPCell
-import com.lowagie.text.pdf.PdfPTable
+import org.openpdf.text.*
+import org.openpdf.text.pdf.PdfPCell
+import org.openpdf.text.pdf.PdfPTable
 import org.intellij.markdown.MarkdownElementTypes.BLOCK_QUOTE
 import org.intellij.markdown.ast.ASTNode
 import org.intellij.markdown.ast.LeafASTNode

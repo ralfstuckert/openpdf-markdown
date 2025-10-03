@@ -1,11 +1,11 @@
 package com.github.ralfstuckert.openpdf.markdown.renderer
 
 import com.github.ralfstuckert.openpdf.markdown.*
-import com.lowagie.text.Chunk
-import com.lowagie.text.Paragraph
-import com.lowagie.text.Rectangle
-import com.lowagie.text.pdf.PdfPCell
-import com.lowagie.text.pdf.PdfPTable
+import org.openpdf.text.Chunk
+import org.openpdf.text.Paragraph
+import org.openpdf.text.Rectangle
+import org.openpdf.text.pdf.PdfPCell
+import org.openpdf.text.pdf.PdfPTable
 import org.intellij.markdown.IElementType
 import org.intellij.markdown.ast.ASTNode
 import org.intellij.markdown.ast.getTextInNode

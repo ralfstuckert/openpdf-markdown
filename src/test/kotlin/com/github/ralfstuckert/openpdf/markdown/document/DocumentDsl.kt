@@ -3,8 +3,8 @@ package com.github.ralfstuckert.openpdf.markdown.document
 import com.github.ralfstuckert.openpdf.markdown.MarkdownRendererRegistry
 import com.github.ralfstuckert.openpdf.markdown.OpenPdfMarkdownGenerator
 import com.github.ralfstuckert.openpdf.markdown.defaultRenderContext
-import com.lowagie.text.*
-import com.lowagie.text.pdf.PdfWriter
+import org.openpdf.text.*
+import org.openpdf.text.pdf.PdfWriter
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 

@@ -1,8 +1,8 @@
 package com.github.ralfstuckert.openpdf.markdown.renderer
 
 import com.github.ralfstuckert.openpdf.markdown.*
-import com.lowagie.text.Chunk
-import com.lowagie.text.Font
+import org.openpdf.text.Chunk
+import org.openpdf.text.Font
 import org.intellij.markdown.MarkdownElementTypes.CODE_SPAN
 import org.intellij.markdown.MarkdownTokenTypes.Companion.BACKTICK
 import org.intellij.markdown.ast.ASTNode

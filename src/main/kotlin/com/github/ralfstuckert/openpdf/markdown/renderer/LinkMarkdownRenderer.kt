@@ -3,7 +3,7 @@ package com.github.ralfstuckert.openpdf.markdown.renderer
 import com.github.ralfstuckert.openpdf.markdown.*
 import com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.COLOR
 import com.github.ralfstuckert.openpdf.markdown.PdfRenderContextKeys.LINE_THICKNESS
-import com.lowagie.text.Anchor
+import org.openpdf.text.Anchor
 import org.intellij.markdown.MarkdownElementTypes.INLINE_LINK
 import org.intellij.markdown.MarkdownElementTypes.LINK_DESTINATION
 import org.intellij.markdown.MarkdownElementTypes.LINK_TEXT

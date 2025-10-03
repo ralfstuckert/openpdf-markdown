@@ -2,7 +2,7 @@ package com.github.ralfstuckert.openpdf.markdown
 
 import com.github.ralfstuckert.openpdf.markdown.document.document
 import com.github.ralfstuckert.openpdf.markdown.renderer.CodeBlockMarkdownRenderer
-import com.lowagie.text.Font
+import org.openpdf.text.Font
 import org.junit.jupiter.api.Test
 import java.awt.Color
 

@@ -1,9 +1,9 @@
 package com.github.ralfstuckert.openpdf.markdown.renderer
 
 import com.github.ralfstuckert.openpdf.markdown.*
-import com.lowagie.text.Chunk
-import com.lowagie.text.Font
-import com.lowagie.text.Paragraph
+import org.openpdf.text.Chunk
+import org.openpdf.text.Font
+import org.openpdf.text.Paragraph
 import org.intellij.markdown.MarkdownElementTypes.CODE_FENCE
 import org.intellij.markdown.MarkdownTokenTypes.Companion.CODE_FENCE_END
 import org.intellij.markdown.MarkdownTokenTypes.Companion.CODE_FENCE_START

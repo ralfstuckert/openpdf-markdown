@@ -1,6 +1,6 @@
 package com.github.ralfstuckert.openpdf.markdown
 
-import com.lowagie.text.Font
+import org.openpdf.text.Font
 import java.awt.Color
 
 object PdfRenderContextDefaults {
