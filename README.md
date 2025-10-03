@@ -56,10 +56,10 @@ replace the renderer code at all.
 <dependency>
   <groupId>com.github.ralfstuckert</groupId>
   <artifactId>openpdf-markdown</artifactId>
-  <version>0.1.0</version>
+  <version>0.3.0</version>
 </dependency>
 ```
 
 ```gradle
-implementation("com.github.ralfstuckert:openpdf-markdown:0.1.0")
+implementation("com.github.ralfstuckert:openpdf-markdown:0.3.0")
 ```
