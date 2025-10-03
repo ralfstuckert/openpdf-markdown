@@ -1,6 +1,6 @@
 [![Java CI with Gradle](https://github.com/ralfstuckert/openpdf-markdown/actions/workflows/ci.yml/badge.svg)](https://github.com/ralfstuckert/openpdf-markdown/actions/workflows/ci.yml)
 ![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/ralfstuckert/b402d9e89cfacd00c180599aa8d01386/raw/badge.json)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/OWNER/REPO)](https://github.com/OWNER/REPO/releases)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/ralfstuckert/openpdf-markdown)](https://github.com/ralfstuckert/openpdf-markdown/releases)
 
 
 # OpenPDF Markdown
