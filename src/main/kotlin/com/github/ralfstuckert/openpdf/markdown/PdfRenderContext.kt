@@ -13,11 +13,9 @@ inline fun <reified T : Any> PdfRenderContextKey(name: String) =
     PdfRenderContextKey(name, T::class.java)
 
 
-data class PdfRenderContext(internal val contextMap: Map<PdfRenderContextKey<*>, Any>) {
 @ConsistentCopyVisibility
 data class PdfRenderContext internal constructor(val contextMap: Map<PdfRenderContextKey<*>, Any>) {
 
-    @Suppress("NON_PUBLIC_CALL_FROM_PUBLIC_INLINE")
     inline operator fun <reified T : Any> get(key: PdfRenderContextKey<T>): T? =
         when (val value = contextMap[key]) {
             null -> null
