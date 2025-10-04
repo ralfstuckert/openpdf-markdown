@@ -56,13 +56,11 @@ Just head over to the [Getting Started](https://github.com/ralfstuckert/openpdf-
 and information on to customize the default rendering of the markdown or even
 replace the renderer code at all.
 
-[![GitHub release](https://img.shields.io/github/v/release/ralfstuckert/openpdf-markdown)](https://github.com/ralfstuckert/openpdf-markdown/packages)
-
 ```xml
 <dependency>
   <groupId>com.github.ralfstuckert</groupId>
   <artifactId>openpdf-markdown</artifactId>
-  <version>[![GitHub release](https://img.shields.io/github/v/release/ralfstuckert/openpdf-markdown)](https://github.com/ralfstuckert/openpdf-markdown/packages)</version>
+  <version>0.3.0</version>
 </dependency>
 ```
 
