@@ -60,7 +60,8 @@ replace the renderer code at all.
 <dependency>
   <groupId>com.github.ralfstuckert</groupId>
   <artifactId>openpdf-markdown</artifactId>
-  <version>0.3.0</version>
+  <version>[![GitHub release](https://img.shields.io/github/v/release/ralfstuckert/openpdf-markdown)](https://github.com/ralfstuckert/openpdf-markdown/packages)
+</version>
 </dependency>
 ```
 
